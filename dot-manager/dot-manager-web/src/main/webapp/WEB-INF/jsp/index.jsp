@@ -25,12 +25,11 @@
   <link rel="stylesheet" href="/web/AdminLTE/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
   <!-- Daterange picker -->
   <link rel="stylesheet" href="/web/AdminLTE/bower_components/bootstrap-daterangepicker/daterangepicker.css">
-  <!-- bootstrap wysihtml5 - text editor -->
-  <link rel="stylesheet" href="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
 
-  <!-- Bootstrap 3.3.7 -->
+  <!-- Bootstrap table &editable  -->
+  
   <link rel="stylesheet" href="/web/AdminLTE/bower_components/bootstrap-table-master/dist/bootstrap-table.min.css">
-
+  <link rel="stylesheet" href="//rawgit.com/vitalets/x-editable/master/dist/bootstrap3-editable/css/bootstrap-editable.css">
   <!-- my application 
   <link rel="stylesheet" href="/web/css/gateway_detail.css">  
 -->
@@ -533,7 +532,8 @@
 <script src="/web/AdminLTE/bower_components/fastclick/lib/fastclick.js"></script>
 <!--  bootstrap table-->
 <script src="/web/AdminLTE/bower_components/bootstrap-table-master/dist/bootstrap-table.min.js"></script>
-
+<script src="/web/AdminLTE/bower_components/bootstrap-table-master/src/extensions/editable/bootstrap-table-editable.js"></script>
+<script src="//rawgit.com/vitalets/x-editable/master/dist/bootstrap3-editable/js/bootstrap-editable.js"></script>
 <!--  jquery form validation-->
 <script src="/web/AdminLTE/bower_components/jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
 <!-- AdminLTE App -->

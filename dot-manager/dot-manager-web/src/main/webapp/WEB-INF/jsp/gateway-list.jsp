@@ -15,12 +15,18 @@
    		<div class="box-body box-profile"> 
    		<!-- tool bar -->
    	    <div id="toolbar">
+   	    <div class="btn-group">
 	        <button id="new" class="btn btn-primary" onClick="TUI.loadFrame('gateway-add')">
 	            <i class="glyphicon glyphicon-plus"></i> New
-	        </button>    
+	        </button>  
+	        <button id="edit" class="btn btn-Default" onClick="editGateway()">
+	            <i class="glyphicon glyphicon-pencil"></i> Edit
+	        </button>    	          
 	        <button id="remove" class="btn btn-danger"  onClick="deleteGateway()">
 	            <i class="glyphicon glyphicon-remove"></i> Delete
 	        </button>
+	        
+	        </div>
     	</div>
     	
     	<!-- list table -->
@@ -71,16 +77,15 @@
 
          },
          {
-             title: "设备名称",//标题
+             title: "Name",//标题
              field: "deviceName",//键名
              width: 180,
-             sortable: true,
              valign: 'middle',             
-             editable: true
+ //            editable: true
          },
          {
              field: "serialNumber",
-             title: "设备号",
+             title: "Series Number",
              width: 180,
              formatter:'deviceEsnFormat',
              sortable: true,
@@ -89,7 +94,7 @@
          },
          {
              field: "status",
-             title: "状态",
+             title: "Status",
              width: 150,
              sortable: true,
              valign: 'middle',             
@@ -97,30 +102,30 @@
            },         
          {
              field: "groupName",
-             title: "设备组",
+             title: "Group",
              width: 180,
              valign: 'middle',             
              formatter:'groupFormat'               
           },
           {
               field: "type",
-              title: "设备类型",
+              title: "Model",
               valign: 'middle',              
               sortable: true,
-              editable: true,              
+//              editable: true,              
                width: 100
            },     
            {
                field: "position",
-               title: "安装位置",
+               title: "Location",
                valign: 'middle',               
-               editable: true,                   
+//               editable: true,                   
                   width:300
             },                    
             {
                 field: "softwareVersion",
                 valign: 'middle',                
-                title: "软件版本",
+                title: "Software",
                 width: 60
              }      
      ]
@@ -232,21 +237,32 @@
 	function deleteGateway(){
        	var ids = getIdSelections();
     	if(ids.length == 0){
-    		$(".alert").alert();
+    		$("alert").alert();
     		return ;
     	}
     	var param = {"ids":ids};
-    	console.log(param);
        	$.post("gateway/delete",param, function(data){
 			if(data.status == 200){
-				console.log("200");
 	            $table.bootstrapTable('remove', {
 	                field: 'serialNumber',
 	                values: ids
 	            });
 			}
 		});
+       	
+
        	return;
+    }
+	
+	function editGateway(){
+       	var ids = getIdSelections();
+    	if( ids.length != 1 ){
+    		$("alert").alert();
+    		return ;
+    	}
+       	TUI.loadFrame("gateway-edit?esn="+ids[0]);
+       	return;
+
     }
 		
 

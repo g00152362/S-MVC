@@ -117,8 +117,6 @@
  
 <script>
 $(function(){ 
-	var tt ="${param.esn}" ;
-	//var tt = $.getUrlParam('esn');
 
 	$.getJSON("gateway/listid?esn=${param.esn}",
 		function(data){

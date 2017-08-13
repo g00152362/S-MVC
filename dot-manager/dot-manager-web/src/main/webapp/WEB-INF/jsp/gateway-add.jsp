@@ -64,12 +64,12 @@
     		      <!--box body -->
 	              <div class="box-footer">
 	              
-	              	<div class="col-sm-2 col-sm-offset-2">
-	                <button type="submit" class="btn btn-primary" >Submit</button> 
+	              	<div class="col-sm-2 col-sm-offset-1">
+	                <button type="submit" class="btn btn-primary"  >Submit</button> 
 	                </div>
 	                
 	                <div class="col-sm-2 col-sm-offset-2">           
-	                <button type="button" class="btn btn-default ">Cancel</button>
+	                <button type="button" class="btn btn-default " onclick="cancelAdd()">Cancel</button>
 	                </div>
 	               <!-- to be develop --> 	                
 	              	<div class="col-sm-2 col-sm-offset-2">
@@ -91,6 +91,7 @@
 <script type="text/javascript">
 
 $().ready(function() {
+	 
 	 $("#gatewayAddForm").validate({
 	        rules : {
 	        	serialNumber: "required",
@@ -122,6 +123,10 @@ $().ready(function() {
 
 	function clearForm(){
 		$('#gatewayAddForm').form('reset');
+	}
+	
+	function cancelAdd(){
+		TUI.loadFrame('gateway-list');
 	}
 	
 
