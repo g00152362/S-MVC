@@ -1,0 +1,80 @@
+
+
+(function($){
+	$.insdep={
+		ajax:function(c){
+			var d={
+				url:"",
+				async:false,//true异步请求,false同步请求,注：同步请求将锁住浏览器，用户其它操作必须等待请求完成才可以执行
+				cache:false,
+				type:"POST",
+				dataType:"html",
+				beforeSend:function(){
+					$.messager.progress();
+				},
+				complete:function(){
+					$.messager.progress('close');
+				}
+			};
+			var n=$.extend(true,d,c);
+			$.ajax(n);
+		},
+		error:function(result) {
+			$('<div/>').window({
+				id:"insdep-error-debug-window",
+				cache:false,
+			    width : 720,
+			    height : 480,
+			    modal : true,
+				title:"错误",
+				content:"<div style='padding:15px;overflow:hidden;height:auto;clear:both;'><b>Return Error</b><br/>"+result+"<br/></div>",
+				border:false,
+				collapsible:false,
+				minimizable:false,
+				maximizable:false,
+				queryParams:"",
+				onClose:function() {
+					$(this).window('destroy');
+				},
+				buttons:[]
+			});
+		},
+		window:function(c){
+			var d={
+               id:"temp-window",
+               href:"",
+               cache:false,
+               method:"post",
+               width : 680,
+               height : 550,
+               modal : true,
+               title:"",
+               border:false,
+               collapsible:false,
+               minimizable:false,
+               maximizable:false,
+               queryParams:"",
+               onClose:function() {
+                  $(this).window('destroy');
+               },
+               buttons:[]
+			};
+			var n=$.extend(true,d,c);
+			$('<div/>').window(n);
+		},
+		control:function(url,queryParams){
+			$('#control').panel({    
+				href:url,
+				cache:false,
+				method:"post",
+				queryParams:queryParams?queryParams:{},    
+				onLoad:function(){    
+					//alert('loaded successfully');    
+				},
+				onBeforeLoad:function(){
+					$(this).panel('clear');
+				}
+			}); 
+		}
+	}
+

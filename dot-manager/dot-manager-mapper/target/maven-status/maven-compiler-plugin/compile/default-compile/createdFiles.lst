@@ -1,0 +1,14 @@
+com\dot\mapper\TbNodeMapper.class
+com\dot\mapper\TbSensorCatMapper.class
+com\dot\mapper\TbItemCatMapper.class
+com\dot\mapper\TbOrderMapper.class
+com\dot\mapper\TbItemParamItemMapper.class
+com\dot\mapper\TbItemParamMapper.class
+com\dot\mapper\TbGatewayInfoMapper.class
+com\dot\mapper\TbContentMapper.class
+com\dot\mapper\TbItemMapper.class
+com\dot\mapper\TbOrderItemMapper.class
+com\dot\mapper\TbUserMapper.class
+com\dot\mapper\TbOrderShippingMapper.class
+com\dot\mapper\TbItemDescMapper.class
+com\dot\mapper\TbContentCategoryMapper.class

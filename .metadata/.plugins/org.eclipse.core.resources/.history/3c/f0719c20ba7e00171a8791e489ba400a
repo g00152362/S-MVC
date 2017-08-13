@@ -1,0 +1,23 @@
+TUI.loadFram();
+
+
+var	TUI={
+		loadFrame:function(){
+			$( "#pp" ).load( "info" );		
+		},
+		control:function(url,queryParams){
+			$('#control').panel({    
+				href:url,
+				cache:false,
+				method:"post",
+				queryParams:queryParams?queryParams:{},    
+				onLoad:function(){    
+					//alert('loaded successfully');    
+				},
+				onBeforeLoad:function(){
+					$(this).panel('clear');
+				}
+			});
+		}
+};
+

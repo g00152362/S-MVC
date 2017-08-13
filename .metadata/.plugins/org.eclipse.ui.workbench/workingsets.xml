@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workingSetManager>
+<workingSet editPageId="org.eclipse.ui.resourceWorkingSetPage" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1493828064367_1" label="dot-manager" name="dot-manager">
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/dot-manager" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/dot-manager-mapper" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/dot-manager-service" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/dot-manager-pojo" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/dot-manager-web" type="4"/>
+</workingSet>
+<workingSet aggregate="true" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1493396222187_0" label="Window Working Set" name="Aggregate for window 1493396222187"/>
+</workingSetManager>

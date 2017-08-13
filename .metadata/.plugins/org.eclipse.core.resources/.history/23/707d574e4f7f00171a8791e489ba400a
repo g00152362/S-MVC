@@ -1,0 +1,225 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+<body>
+   <!-- Content Header (Page header) -->
+   <section class="content-header">
+     <h3>
+       Device Profile
+     </h3>
+   </section>
+
+   <!-- Main content -->
+   <section class="content">    
+	<div class="container "  style="width:100%;">
+      <div class="row">
+       	 <!--basic  information-->      
+        <div class="col-md-3">
+ 			<div class="box box-primary">
+            	<div class="box-body box-profile"> 
+            		<!-- device pic,name,status -->
+ 					<img span id="status" class="profile-user-img img-responsive img-circle" src="images/AR502EGRc-Lc.png" alt="Device picture">
+
+		             <h3 class="profile-username text-center">
+							<span id="deviceName" >&nbsp;</span>
+					 </h3>
+		             <p class="text-muted text-center">
+							<img  id="pic_status" width="20" height="20" src="images/circle_green.png" />
+							<span id="status">&nbsp;</span>              
+		             </p>
+		             <!-- device esn,group,position -->
+		              <ul class="list-group list-group-unbordered">
+		                <li class="list-group-item">
+		                  Esn: <a class="pull-right"><span id="serialNumber">&nbsp;</span></a>
+		                </li>
+		                <li class="list-group-item">
+		                  Group: <a class="pull-right"><span id="groupName">&nbsp;</span></a>
+		                </li>
+		                <li class="list-group-item">
+		                  Location: <a class="pull-right"><span id="position">&nbsp;</span></a>
+		                </li>
+		              </ul>            	   
+            	 
+            	</div>
+            	</div> 
+            	<!-- ./box body primary -->        
+        </div>
+        <!-- ./basic information -->
+        
+        <!-- detail information -->
+        <div class="col-md-9"> 			
+        	<div class="box box-primary">
+	            <div class="box-header with-border">
+	              <h3 class="box-title">Detail Information</h3>
+	            </div>        	
+	            
+            	<div class="box-body box-profile"> 
+			        <div class="col-md-5 ">
+		              <ul class="list-group list-group-unbordered">
+		                <li class="list-group-item ">
+		                  Type: <a class="pull-right"><span id="type">&nbsp;</span></a>
+		                </li>
+		                <li class="list-group-item">
+		                  Vendor: <a class="pull-right"><span id="vendor">&nbsp;</span></a>
+		                </li>
+		                <li class="list-group-item">
+		                  MAC: <a class="pull-right"><span id="mac">&nbsp;</span></a>
+		                </li>
+		                <li class="list-group-item">
+		                  IP: <a class="pull-right"><span id="ip">&nbsp;</span></a>
+		                </li>	
+		                <li class="list-group-item">
+		                  BootTime: <a class="pull-right"><span id="bootTime">&nbsp;</span></a>
+		                </li>		
+		                <li class="list-group-item">
+		                  Boot Reason: <a class="pull-right"><span id="lastRebootType">&nbsp;</span></a>
+		                </li>				                                	                
+		              </ul> 			        
+			        </div>
+			        <div class="col-md-5 col-md-offset-1">
+			          <ul class="list-group list-group-unbordered">
+		                <li class="list-group-item">
+		                  Description: <a class="pull-right"><span id="description">&nbsp;</span></a>
+		                </li>			          
+		                <li class="list-group-item">
+		                  Software Version: <a class="pull-right"><span id="softwareVersion">&nbsp;</span></a>
+		                </li>
+		                <li class="list-group-item">
+		                  patch Version: <a class="pull-right"><span id="patchVersion">&nbsp;</span></a>
+		                </li>
+		                <li class="list-group-item">
+		                  Hardware Version: <a class="pull-right"><span id="hardwareVersion">&nbsp;</span></a>
+		                </li>		                
+		                <li class="list-group-item">
+		                  Last Report Time: <a class="pull-right"><span id="reportTime">&nbsp;</span></a>
+		                </li>
+		                <li class="list-group-item">
+		                  Last Update Time: <a class="pull-right"><span id="updateTime">&nbsp;</span></a>
+		                </li>		                
+		              </ul> 
+			        </div>
+			            	
+            	</div>
+            </div>
+            <!-- ./box body primary --> 
+        
+        </div>
+        <!-- ./detail information -->
+       </div>
+       <!-- ./row -->
+
+<!--    pic should be load by database, to be developed --> 
+  
+  </div>
+</section>
+    
+	
+
+ 
+<script>
+$(function(){ 
+	var tt ="${param.esn}" ;
+	//var tt = $.getUrlParam('esn');
+
+	$.getJSON("gateway/listid?esn=${param.esn}",
+		function(data){
+			if(data.status != 200){
+				alert("get data fail!");
+				return;
+			}
+			addDeviceInfo(data.data);
+			changeStatue(data.data.status);
+	
+			loadDeviceScript(data.data.position);
+
+	}); 
+ 
+}); 
+
+	addDeviceInfo = function(info)
+	{
+		// fill position;
+		$("#serialNumber").text(info.serialNumber);
+		$("#position").text(info.position);
+		$("#deviceName").text(info.deviceName);
+		$("#groupName").text(info.groupName);	
+		$("#type").text(info.type);	
+		$("#vendor").text(info.vendor);	
+		$("#mac").text(info.mac);	
+		$("#ip").text(info.ip);	
+		$("#bootTime").text(BASIC.formatDateTime(info.bootTime));	
+		$("#lastRebootType").text(GATEWAY.formatRebootReason(info.lastRebootType));	
+		$("#softwareVersion").text(info.softwareVersion);	
+		$("#hardwareVersion").text(info.hardwareVersion);	
+		$("#reportTime").text(BASIC.formatDateTime(info.reportTime));	
+		$("#updateTime").text(BASIC.formatDateTime(info.updatedTime));
+		
+	
+	};
+	
+	changeStatue = function(value)
+	{
+ 		if(value == 1)
+ 		{
+ 			$("#pic_router").attr("src","images/circle_green");
+ 
+ 			
+ 			document.getElementById("pic_status").src="images/circle_green.png";
+			$("#status").text(" Online");
+		
+
+ 		}
+  		else if(value == 0){
+  			$("#pic_router").attr("src","images/circle_gray.png");
+		
+ 			document.getElementById("pic_status").src="images/circle_gray.png";
+			$("#status").text(" Offline");
+
+ 		}
+
+	};
+	
+ 	//百度地图API功能
+	loadDeviceScript =function (pos) {
+		console.log(pos); 		
+		var script = document.createElement("script");
+		script.type = "text/javascript";
+		script.src = "http://api.map.baidu.com/api?v=2.0&ak=pta3ObbcGPGMGfFTGAI97lbkzRhCaShc&callback=loadMap(\"" + pos +"\")";
+		document.body.appendChild(script);
+
+	loadMap = function(pos)
+	{
+		var map = new BMap.Map("allmap", {enableMapClick:false});            // 创建Map实例
+/* 		var point = new BMap.Point(116.404, 39.915); // 创建点坐标
+		map.centerAndZoom(point,15);                 
+		map.enableScrollWheelZoom();                 //启用滚轮放大缩 */		
+
+	//	map.addControl(new BMap.MapTypeControl());   //添加地图类型控件
+
+		var myGeo = new BMap.Geocoder();		
+		myGeo.getPoint(pos, function(point){
+			if (point) {
+				var address = new BMap.Point(point.lng, point.lat);
+				map.centerAndZoom(address,15);                 
+				map.enableScrollWheelZoom(true);							
+				
+				var myIcon = new BMap.Icon("images/map_anchor_blue.png",
+						{anchor: new BMap.Size(100, 100), imageOffset: new BMap.Size(0,0)});
+
+				var marker2 = new BMap.Marker(address,{icon:myIcon});  // 创建标注	
+				map.addOverlay(marker2);
+				var label = new BMap.Label(pos,{offset:new BMap.Size(20,20),});
+				 label.setStyle({
+					 "color":"blue",                 
+					 "fontSize":"14px", 
+					 "border":"0", 
+					 "backgroundColor" :"0.05",						 
+					 });
+				
+					marker2.setLabel(label); 				
+			}
+		}, "南京市");		 
+	};
+}	;
+	
+</script>
+</body>

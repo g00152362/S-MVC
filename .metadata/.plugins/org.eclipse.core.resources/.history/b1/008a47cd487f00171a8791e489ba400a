@@ -1,0 +1,85 @@
+@CHARSET "UTF-8";
+
+.tb_head {
+	margin-left: 30px;
+}
+.tx_infoHeadName {
+	font-size: 30px;
+	padding-top:20px;
+	padding-bottom:20px;	
+
+}
+
+.tx_infoHeadAddress{
+	font-size: 10px;
+	padding-top:20px;
+	padding-bottom:20px;	
+
+}
+
+.tx_infoHead {
+	font-size: 20px;
+	padding-top:20px;
+	padding-bottom:20px;	
+}
+.tx_picHead {
+	font-size: 20px;
+	margin-top:20px;
+	display:block;
+}
+.scell_noboard {
+	border-top-style: none;
+	border-right-style: none;
+	border-bottom-style: none;
+	border-left-style: none;
+	color: #666666;
+	padding-top:10px;
+
+}
+.scell_bottom {
+	border-bottom-width: thin;
+	border-bottom-style: solid;
+	border-bottom-color: #333333;
+	padding-top:5px;
+	padding-bottom:10px;	
+}
+
+.device_info {
+	display: inline;
+	width: 100%;
+	position: absolute;
+	left: 0px;
+	float: left;
+	align: left;
+	height: 1000px;
+}
+.basic_info {
+	position: absolute;
+	width: 45%;
+	padding-top: 0px;
+	display: inline;
+	margin-left: 30px;
+	margin-top:20px;
+	margin-bottom:20px;	
+}
+.device_pp {
+	text-align: center;
+	display: inline;
+}
+
+.device_geo{
+	display: inline;
+	position: relative;
+	float: right;
+	align: right;
+	margin-right: 30px;
+	margin-top:20px;
+	margin-bottom:20px;	
+	width: 50%;
+	height: 300px;
+}
+.map_position{
+	width:100%;
+	max-height:250px;
+}
+

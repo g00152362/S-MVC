@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring accessors="true" comment="Delete 4 element(s) from project &apos;dot-manager&apos;&#x0D;&#x0A;- Original project: &apos;dot-manager&apos;&#x0D;&#x0A;- Original elements:&#x0D;&#x0A;     jquery.easyui-1.5.1.min.js&#x0D;&#x0A;     jquery.easyui.min.js&#x0D;&#x0A;     jquery.insdep-extend.min.js&#x0D;&#x0A;     jquery.min.js" description="Delete elements" element1="dot-manager-web/src/main/webapp/WEB-INF/css/jquery.insdep-extend.min.js" element2="dot-manager-web/src/main/webapp/WEB-INF/css/jquery.min.js" element3="dot-manager-web/src/main/webapp/WEB-INF/css/jquery.easyui-1.5.1.min.js" element4="dot-manager-web/src/main/webapp/WEB-INF/css/jquery.easyui.min.js" elements="0" flags="589830" id="org.eclipse.wst.jsdt.ui.delete" resources="4" stamp="1493395390789" subPackages="false" version="1.0"/>
+</session>

@@ -1,0 +1,12 @@
+
+
+
+var	TUI={
+		loadFrame:function(url){
+			$( "#mainContext" ).load( url);		
+		},
+};
+
+
+TUI.loadFrame('dashboard-map');
+

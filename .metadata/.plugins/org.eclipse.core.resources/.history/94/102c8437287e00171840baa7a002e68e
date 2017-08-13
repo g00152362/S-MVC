@@ -1,0 +1,19 @@
+$( "#pp" ).load( "test.jsp" );
+
+var	TUI={
+		control:function(url,queryParams){
+			$('#control').panel({    
+				href:url,
+				cache:false,
+				method:"post",
+				queryParams:queryParams?queryParams:{},    
+				onLoad:function(){    
+					//alert('loaded successfully');    
+				},
+				onBeforeLoad:function(){
+					$(this).panel('clear');
+				}
+			});
+		}
+};
+

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="java.util.concurrent.ScheduledExecutorService"/>
+<fullyQualifiedTypeName name="java.util.TimerTask"/>
+<fullyQualifiedTypeName name="org.eclipse.paho.client.mqttv3.MqttCallback"/>
+<fullyQualifiedTypeName name="java.io.IOException"/>
+<fullyQualifiedTypeName name="java.security.Timestamp"/>
+<fullyQualifiedTypeName name="org.eclipse.paho.client.mqttv3.MqttException"/>
+<fullyQualifiedTypeName name="javax.jms.BytesMessage"/>
+<fullyQualifiedTypeName name="java.sql.Date"/>
+<fullyQualifiedTypeName name="java.util.Date"/>
+</qualifiedTypeNameHistroy>

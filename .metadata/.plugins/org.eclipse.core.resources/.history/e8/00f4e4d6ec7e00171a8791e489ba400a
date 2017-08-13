@@ -1,0 +1,43 @@
+var GATEWAY = {
+		
+		/*format device statue */
+		formatStatus : function (value,row,index)
+		{
+	 		if(value == 1){
+	 			return "<span style=\"display:table-cell;vertical-align:middle;height:45px;color:#5ECC49;font-size:40px;\">\&#8226</span>"+"<span style=\"display:table-cell;vertical-align:middle;height:45px;\">在线</span>";
+	 		}
+	 		else if(value == 0){
+	 			return "<span style=\"display:table-cell;vertical-align:middle;height:45px;color:#AAAAAA;font-size:40px;\">\&#8226</span>"+"<span style=\"display:table-cell;vertical-align:middle;height:45px;\">离线</span>";
+	 		}
+	 		else if(value == 2){
+	 			return "<span style=\"display:table-cell;vertical-align:middle;height:45px;color:#AAAAAA;font-size:40px;\">\&#8226</span>"+"<span style=\"display:table-cell;vertical-align:middle;height:45px;\">未注册</span>";
+	 		}	 		
+	 		else{
+	 			return "未知";
+	 		}
+			
+		},
+		
+		formatRebootReason: function(val,row){
+			switch(val){
+			case 1:
+				return "Cold Start";
+			case 2:
+				return "Command Reboot" ;
+			case 3: 
+				return "Reboot by Alige controller";
+			case 4:
+				return "Factory reset";
+			case 5:
+				return "Reboot from Usb Upgrade";
+			case 6:
+				return "reboot by 3rd APP";
+			default:
+				return "Unknow Reason";
+			
+			}
+				
+		},		
+		
+
+};

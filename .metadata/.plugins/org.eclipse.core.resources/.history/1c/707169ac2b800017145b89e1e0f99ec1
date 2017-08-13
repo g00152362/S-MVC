@@ -1,0 +1,253 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+<body>
+   <!-- Content Header (Page header) -->
+   <section class="content-header">
+     <h3>
+       Device List
+     </h3>
+   </section>
+   
+   <!-- Main content -->
+   <section class="content"> 
+   	<div class="container "  style="width:100%;">
+   		<div class="box box-primary">
+   		<div class="box-body box-profile"> 
+   		<!-- tool bar -->
+   	    <div id="toolbar">
+	        <button id="new" class="btn btn-primary" onClick="TUI.loadFrame('gateway-add')">
+	            <i class="glyphicon glyphicon-plus"></i> New
+	        </button>    
+	        <button id="remove" class="btn btn-danger" disabled onClick="deleteGateway()">
+	            <i class="glyphicon glyphicon-remove"></i> Delete
+	        </button>
+    	</div>
+    	
+    	<!-- list table -->
+	    <table id="gatewayList"
+	           data-toolbar="#toolbar"
+	           data-search="true"
+	           data-show-refresh="true"
+	           data-show-toggle="true"
+	           data-show-columns="true"
+	           data-show-export="true"
+	           data-detail-view="false"
+	           data-detail-formatter="detailFormatter"
+	           data-minimum-count-columns="2"
+	           data-show-pagination-switch="true"
+	           data-pagination="true"
+	           data-id-field="serialNumber"
+	           data-page-list="[10, 25, 50, 100, ALL]"
+	           data-show-footer="false"
+	           data-side-pagination="server"
+	           data-toolbar-align="left"
+	           data-url="/gateway/list"
+	           data-response-handler="responseHandler">
+	    	</table>    	
+   	  </div>
+   	  </div>
+   	  <!-- ./box -->
+   	</div>
+   </section>   
+   
+ 
+<script>
+    var $table = $('#gatewayList'),
+        $remove = $('#remove'),
+        selections = [];
+    
+    function initTable() {
+        $table.bootstrapTable({
+   	     dataField: "rows",
+         height: getHeight(),
+
+     columns: [
+         {
+             field: "ck",            	 
+             checkbox: true,
+             valign: 'middle' ,  
+             align:'center',             
+
+         },
+         {
+             title: "设备名称",//标题
+             field: "deviceName",//键名
+             width: 180,
+             sortable: true,
+             valign: 'middle',             
+             editable: true
+         },
+         {
+             field: "serialNumber",
+             title: "设备号",
+             width: 180,
+             formatter:'deviceEsnFormat',
+             sortable: true,
+             valign: 'middle',
+             titleTooltip: "设备序列号"
+         },
+         {
+             field: "status",
+             title: "状态",
+             width: 150,
+             sortable: true,
+             valign: 'middle',             
+             formatter:'formatStatus'
+           },         
+         {
+             field: "groupName",
+             title: "设备组",
+             width: 180,
+             valign: 'middle',             
+             formatter:'groupFormat'               
+          },
+          {
+              field: "type",
+              title: "设备类型",
+              valign: 'middle',              
+              sortable: true,
+              editable: true,              
+               width: 100
+           },     
+           {
+               field: "position",
+               title: "安装位置",
+               valign: 'middle',               
+               editable: true,                   
+                  width:300
+            },                    
+            {
+                field: "softwareVersion",
+                valign: 'middle',                
+                title: "软件版本",
+                width: 60
+             }      
+     ]
+   });
+
+        $table.on('check.bs.table uncheck.bs.table ' +
+                'check-all.bs.table uncheck-all.bs.table', function () {
+            $remove.prop('disabled', !$table.bootstrapTable('getSelections').length);
+            // save your data, here just save the current page
+            selections = getIdSelections();
+            // push or splice the selections if you want to save all data selections
+        });
+        $table.on('expand-row.bs.table', function (e, index, row, $detail) {
+            if (index % 2 == 1) {
+                $detail.html('Loading from ajax request...');
+                $.get('LICENSE', function (res) {
+                    $detail.html(res.replace(/\n/g, '<br>'));
+                });
+            }
+        });
+        $table.on('all.bs.table', function (e, name, args) {
+            console.log(name, args);
+        });
+        
+        $remove.click(function () {
+            var ids = getIdSelections();
+            $table.bootstrapTable('remove', {
+                field: 'id',
+                values: ids
+            });
+            $remove.prop('disabled', true);
+        });
+        $(window).resize(function () {
+            $table.bootstrapTable('resetView', {
+                height: getHeight()
+            });
+        });
+    }
+    
+    function getIdSelections() {
+        return $.map($table.bootstrapTable('getSelections'), function (row) {
+            return row.serialNumber;
+        });
+    }
+    function responseHandler(res) {
+        $.each(res.rows, function (i, row) {
+            row.state = $.inArray(row.id, selections) !== -1;
+        });
+        return res;
+    }
+    function detailFormatter(index, row) {
+        var html = [];
+        $.each(row, function (key, value) {
+            html.push('<p><b>' + key + ':</b> ' + value + '</p>');
+        });
+        return html.join('');
+    }
+    function operateFormatter(value, row, index) {
+        return [
+            '<a class="like" href="javascript:void(0)" title="Like">',
+            '<i class="glyphicon glyphicon-heart"></i>',
+            '</a>  ',
+            '<a class="remove" href="javascript:void(0)" title="Remove">',
+            '<i class="glyphicon glyphicon-remove"></i>',
+            '</a>'
+        ].join('');
+    }
+    window.operateEvents = {
+        'click .like': function (e, value, row, index) {
+            alert('You click like action, row: ' + JSON.stringify(row));
+        },
+        'click .remove': function (e, value, row, index) {
+            $table.bootstrapTable('remove', {
+                field: 'id',
+                values: [row.id]
+            });
+        }
+    };
+
+    
+    $(function () {
+        initTable();
+     });
+    
+    function getHeight() {
+        return $(window).height() - $('h1').outerHeight(true);
+    }
+
+	function formatStatus(value,row,index)
+	{
+ 		if(value == 1){
+ 			return "<span style=\"45px;color:#5ECC49;\">\&#8226</span>"+"<span style=\";\">在线</span>";
+ 		}
+ 		else if(value == 0){
+ 			return "<span style=\"display:table-cell;color:#AAAAAA;font-size:30px;\">\&#8226</span>"+"<span style=\"display:table-cell;\">未注册</span>";
+ 		}
+ 		else if(value == 2){
+ 			return "<span style=\"display:table-cell;vertical-align:middle;height:45px;color:#AAAAAA;font-size:40px;\">\&#8226</span>"+"<span style=\"display:table-cell;vertical-align:middle;height:45px;\">未注册</span>";
+ 		}	 		
+ 		else{
+ 			return "未知";
+ 		}
+		
+	}
+		
+	/*format group */
+	function groupFormat(value,row,index){
+		if(value != "Unsigned_Group")
+		{
+			return "<a  style='color:#009AE7' href='/group/detail?name="+value +"'>"+value+"</a>";
+		}
+		else{
+			return "<span >"+value+"</span>";
+		}
+	
+	} 
+
+	/*format esn */
+	function deviceEsnFormat(value,row,index){
+
+		return "<a  style='color:#009AE7' href=\"#\" onClick=\" TUI.loadFrame('gateway-detail?esn="+value+"')\">"+value+"</a>";	
+		
+	} 
+
+	function deleteGateway(){
+		
+		
+	}
+
+</script>
+</body>

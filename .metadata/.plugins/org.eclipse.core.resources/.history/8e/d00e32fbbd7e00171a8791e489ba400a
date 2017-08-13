@@ -1,0 +1,172 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<body>
+    <section class="content">
+      <!-- Small boxes (Stat box) -->
+      <div class="row">
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-aqua">
+            <div class="inner">
+              <h3>150</h3>
+
+              <p>New Orders</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-bag"></i>
+            </div>
+            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-green">
+            <div class="inner">
+              <h3>53<sup style="font-size: 20px">%</sup></h3>
+
+              <p>Bounce Rate</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-stats-bars"></i>
+            </div>
+            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-yellow">
+            <div class="inner">
+              <h3>44</h3>
+
+              <p>User Registrations</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-person-add"></i>
+            </div>
+            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-red">
+            <div class="inner">
+              <h3>65</h3>
+
+              <p>Unique Visitors</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-pie-graph"></i>
+            </div>
+            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <!-- ./col -->
+      </div>
+      <!-- /.row -->
+      
+  		<!-- begin map -->      
+		<!-- remove baidu icon -->
+		<style type="text/css">.anchorBL{display:none;}	</style>
+		<div class="col-lg-3 col-xs-6" id="allmap" style="width:100%;height:400px;">
+		</div>
+      
+   </section>
+
+
+<script type="text/javascript">
+	//异步加载地图
+	//$('#user-info-more').onAdd = loadJScript;  
+//	$('#p1').hide();
+	
+	//百度地图API功能
+ 	loadJScript = function () {
+		var script = document.createElement("script");
+		script.type = "text/javascript";
+		script.src = "http://api.map.baidu.com/api?v=2.0&ak=pta3ObbcGPGMGfFTGAI97lbkzRhCaShc&callback=init";
+		document.body.appendChild(script);
+	}; 
+	
+ 	$(function(){ 
+		loadJScript();
+	});		
+	
+	//init mapping
+	function init() {
+		var index = 0;
+		var mapdata = new Array();    	
+
+		var map = new BMap.Map("allmap", {enableMapClick:false});            // 创建Map实例
+/* 		var point = new BMap.Point(116.404, 39.915); // 创建点坐标
+		map.centerAndZoom(point,15);                 
+		map.enableScrollWheelZoom();                 //启用滚轮放大缩小 */
+		
+		var myGeo = new BMap.Geocoder();
+		
+		
+		// loading data
+		 $.get("/gateway/list",function(data){
+			 for(var i=0;i<data.rows.length;i++){
+				 mapdata.push( data.rows[i]);
+			//	 console.log(data.rows[i]);
+			 }
+			 // begin to add marker, each 300 us to display one marker
+			 addMarker();			 
+		  });			
+
+			function addMarker(){
+				var add = mapdata[index].position;
+				geoMarkerSet(index,add);
+				index++;
+			};
+	 
+	
+		function geoMarkerSet(ii,add){
+			myGeo.getPoint(add, function(point){
+				if (point)
+				{
+					//if not finish, recall this function
+					if(ii < mapdata.length-1)
+					{
+						setTimeout(addMarker,300);
+					} 
+				
+ 					
+					var address = new BMap.Point(point.lng, point.lat);
+					
+					if(ii == 0){
+						//the first work as the center of map
+						map.centerAndZoom(address,15);                 
+						map.enableScrollWheelZoom();							
+					}
+	
+					//创建蓝色图标						
+ 					var myIcon = new BMap.Icon("images/map_anchor_blue.png",
+							{anchor: new BMap.Size(100, 100), imageOffset: new BMap.Size(0,0)});
+				
+ 					
+					var marker2 = new BMap.Marker(address,{icon:myIcon});  // 创建标注	
+					map.addOverlay(marker2);
+					var label = new BMap.Label(mapdata[ii].deviceName);
+					 label.setStyle({
+						 "color":"red",                 
+						 "fontSize":"14px", 
+						 "border":"0", 
+						 "backgroundColor" :"0.05",						 
+						 });
+					
+						marker2.setLabel(label); 
+				}
+			}, "南京市"); 
+		};
+		
+	
+	} ;
+
+
+</script>
+</body>
+
+
+
