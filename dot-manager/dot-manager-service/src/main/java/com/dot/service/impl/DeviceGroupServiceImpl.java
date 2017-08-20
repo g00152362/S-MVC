@@ -107,6 +107,12 @@ public class DeviceGroupServiceImpl implements DeviceGroupService{
 		if(list != null && list.size()>0){
 			TbDeviceGroup item = list.get(0);
 
+			TbGatewayInfoStat stat = new TbGatewayInfoStat();
+
+			stat = gwMapper.countStatByGroupName(item.getName());
+			item.setOfflinenumber(stat.getOffline());
+			item.setOnlinenumber(stat.getOnline());
+			item.setUnregeisterednumber(stat.getUnregistered());
 			return item;
 		}
 		return null;		

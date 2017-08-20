@@ -35,27 +35,27 @@
 		                <div class="form-group">
 		                  <label for="type" class="col-sm-2 control-label">Type:</label>
 		                  <div class="col-sm-8">
-		                    <input type="text" class="form-control" id="type" placeholder="Device model type">
+		                    <input type="text" class="form-control" name="type" id="type" placeholder="Device model type">
 		                  </div>
 		                </div>  
 		                
 		                <div class="form-group">
 		                  <label for="devicegroup" class="col-sm-2 control-label">Group:</label>
 		                  <div class="col-sm-8">
-		                    <input type="text" class="form-control" id="devicegroup" placeholder="Device in group name">
+		                    <input type="text" class="form-control" name="devicegroup"  id="devicegroup" placeholder="Device in group name" readonly>
 		                  </div>
 		                </div>  
 		                <div class="form-group">
 		                  <label for="type" class="col-sm-2 control-label">Location:</label>
 		                  <div class="col-sm-8">
-		                    <input type="text" class="form-control" id="position" placeholder="Device install location">
+		                    <input type="text" class="form-control" name="position"  id="position" placeholder="Device install location">
 		                  </div>
 		                </div>  
 
 		                <div class="form-group">
 		                  <label for="description" class="col-sm-2 control-label">Description:</label>
 		                  <div class="col-sm-8">
-		                    <textarea class="form-control" rows="3" id="description" placeholder="Device description">
+		                    <textarea class="form-control" rows="3" name="description" id="description" placeholder="Device description">
 		                    </textarea>
 		                  </div>
 		                </div>  
@@ -93,7 +93,7 @@ $().ready(function() {
 					alert("get data fail!");
 					return;
 				}
-				loadDate(data.data);
+				loadData(data.data);
 		}); 	
 	
 	 $("#gatewayEditForm").validate({
@@ -115,7 +115,8 @@ $().ready(function() {
 	            $(element).closest('.form-group').addClass('has-error has-feedback');
 	        },	        
 	        submitHandler :function(form){
-		        	$.post("/rest/gateway/update",$("#gatewayEditForm").serialize(), function(data){
+	        	console.log($("#gatewayEditForm").serialize());
+		        	$.post("/gateway/update",$("#gatewayEditForm").serialize(), function(data){
         			if(data.status == 200){
         				 TUI.loadFrame('gateway-list');
         			}
@@ -124,11 +125,9 @@ $().ready(function() {
 	    });
 	});
 	
-	function loadDate(data){
+	function loadData(data){
 		var FormObject = document.forms['gatewayEditForm'];
 		$.each(data, function(key, val) { 
-			console.log(key +  val);
-			//FormObject.elements["serialNumber"].value="12345";
 			if(FormObject.elements[key] != null){
 				FormObject.elements[key].value=val;
 			}

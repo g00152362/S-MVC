@@ -7,9 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.dot.mapper.TbGatewayInfoMapper;
+
 import com.dot.pojo.TbGatewayInfo;
 import com.dot.pojo.TbGatewayInfoExample;
+import com.dot.pojo.TbGatewayInfoExample.Criteria;
 import com.dot.pojo.TbGatewayInfoStat;
+
 import com.dot.service.GatewayInfoService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -156,6 +159,33 @@ public class GatewayInfoServiceImpl implements GatewayInfoService {
 	public TbGatewayInfoStat getGatewayStatusStatByGroupName(String groupName) {
 		// TODO Auto-generated method stub
 		return itemMapper.countStatByGroupName(groupName);
+	}
+
+	@Override
+	public EUDataGridResult getGatewayListByGroupName(String groupName) {
+		// TODO Auto-generated method stub
+		TbGatewayInfoExample ex = new TbGatewayInfoExample();
+		Criteria cr = ex.createCriteria();
+		cr.andGroupNameEqualTo(groupName);
+		List<TbGatewayInfo> list = itemMapper.selectByExample(ex);
+
+		/*SET DEVICE status*/
+		for(int i=0; i<list.size();i++){
+			TbGatewayInfo tt = list.get(i);
+			tt.setStatus(caluStatus(tt));
+			
+		}	
+		
+		//S2 according the records, add the run information
+		EUDataGridResult result = new EUDataGridResult();
+		
+		PageInfo<TbGatewayInfo> pageInfo = new PageInfo<>(list);
+		int total = (int) pageInfo.getTotal();
+		result.setTotal( Integer.valueOf(total));
+		result.setRows(list);	
+		
+		return result;	
+
 	}
 	
 

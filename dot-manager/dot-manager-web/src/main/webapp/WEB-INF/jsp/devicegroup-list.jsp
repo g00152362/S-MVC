@@ -56,7 +56,6 @@
    	</div>
    </section>   
 
-
  
 <script>
     var $table = $('#deviceGroupList'),
@@ -86,7 +85,7 @@
              field: "name",//键名
              width: 180,
              valign: 'middle',   
-             formatter: groupFormat,             
+             formatter: groupnameFormat,             
  //            editable: true
          },
 
@@ -104,6 +103,13 @@
              valign: 'middle',             
             
           },
+          {
+         	 title: "Unregistered",
+              field: "unregeisterednumber",
+              width: 50,
+              valign: 'middle',             
+             
+           },          
     
             {
                 field: "description",
@@ -186,12 +192,7 @@
 	
 	} 
 
-	/*format esn */
-	function deviceEsnFormat(value,row,index){
 
-		return "<a  style='color:#009AE7' href=\"#\" onClick=\" TUI.loadFrame('gateway-detail?esn="+value+"')\">"+value+"</a>";	
-		
-	} 
 
 	function deleteDeviceGroup(){
        	var ids = getIdSelections();
@@ -225,17 +226,7 @@
 
     }
 		
-	/*format group */
-	function groupFormat(value,row,index){
-		if(value != "Unsigned_Group")
-		{
-			return "<a  style='color:#009AE7' href='/group/detail?name="+value +"'>"+value+"</a>";
-		}
-		else{
-			return "<span >"+value+"</span>";
-		}
-	
-	} 
+
 
 </script>
 </body>

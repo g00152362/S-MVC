@@ -347,7 +347,7 @@
         </li>
         <li>
           <a href="pages/widgets.html">
-            <i class="fa fa-th"></i> <span>Widgets</span>
+            <i class="fa fa-th"></i> <span>Repository</span>
             <span class="pull-right-container">
               <small class="label pull-right bg-green">new</small>
             </span>

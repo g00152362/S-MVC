@@ -38,4 +38,6 @@ public interface GatewayInfoService {
 	
 	TbGatewayInfoStat getGatewayStatusStatByGroupName(String groupName);
 	
+	EUDataGridResult getGatewayListByGroupName(String groupName) ;
+	
 }

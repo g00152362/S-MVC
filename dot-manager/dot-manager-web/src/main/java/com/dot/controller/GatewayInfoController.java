@@ -94,12 +94,13 @@ public class GatewayInfoController {
 	
 
 	
-	@RequestMapping(value = "/rest/gateway/update",method = RequestMethod.POST)	
+	@RequestMapping(value = "/gateway/update",method = RequestMethod.POST)	
 	@ResponseBody
 	public TaotaoResult updateGatewayStaticInfo(TbGatewayInfo gwInfo){
 		
+
 		TaotaoResult result = itemService.updateStaticGatewayInfo(gwInfo);
-		result.setStatus(200);
+		
 		return result;
 		
 	}
@@ -121,6 +122,15 @@ public class GatewayInfoController {
 		 
 		return result;
 	}
+
+	@RequestMapping("/gateway/listBygroupName")
+	@ResponseBody
+	public EUDataGridResult getGatewayListByGroupName( String name){
+
+		EUDataGridResult result = itemService.getGatewayListByGroupName(name);
+
+		return result;
+	}	
 	
 	@RequestMapping("/gateway/statistic")
 	@ResponseBody

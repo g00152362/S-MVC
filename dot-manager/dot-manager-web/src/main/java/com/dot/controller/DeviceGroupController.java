@@ -1,6 +1,5 @@
 package com.dot.controller;
 
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,9 +9,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.dot.pojo.TbDeviceGroup;
-import com.dot.pojo.TbGatewayInfoStat;
+
 import com.dot.service.DeviceGroupService;
-import com.dot.service.GatewayInfoService;
 
 import dot.com.common.pojo.EUDataGridResult;
 import dot.com.common.result.TaotaoResult;
@@ -67,6 +65,25 @@ public class DeviceGroupController {
 	public TaotaoResult getGatewayListid(@RequestParam("id") Integer index){
 
 		TaotaoResult result = itemService.getDeviceGroupDetailById(index.intValue());
+		return result;
+
+	}
+	
+	@RequestMapping("/deviceGroup/listName")
+	@ResponseBody
+	public TaotaoResult getGatewayListByName(@RequestParam("name") String name){
+		TbDeviceGroup dg= itemService.getDeviceGroupDetailByName(name);
+		TaotaoResult result = new TaotaoResult();		
+		if(null != dg)
+		{
+
+			result.setData(dg);
+			result.setStatus (TaotaoResult.SUCCESS);
+		}
+		else{
+			result.setStatus(TaotaoResult.OBJ_IS_NOT_EXSIT);
+		}
+
 		return result;
 
 	}

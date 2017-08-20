@@ -79,7 +79,6 @@
    	  </div>
    	  <!-- ./box -->
    	  </div>
-   	  </div>
    </section>   
 
 <!-- begin select modal--------- -->   
@@ -286,7 +285,7 @@ function getDeviceGroupSelections() {
 	function groupFormat(value,row,index){
 		if(value != "")
 		{
-			return "<a  style='color:#009AE7' href='/group/detail?name="+value +"'>"+value+"</a>";
+			return "<a  style='color:#009AE7'  href=\"#\" onClick=\" TUI.loadFrame('devicegroup-detail?name="+value+"')\">"+value+"</a>";
 		}
 		else{
 			return "<span >Unsigned </span>";
