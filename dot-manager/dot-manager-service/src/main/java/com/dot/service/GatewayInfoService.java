@@ -1,6 +1,7 @@
 package com.dot.service;
 
 import com.dot.pojo.TbGatewayInfo;
+import com.dot.pojo.TbGatewayInfoStat;
 
 import dot.com.common.pojo.EUDataGridResult;
 import dot.com.common.result.TaotaoResult;
@@ -31,6 +32,10 @@ public interface GatewayInfoService {
 	
 	TaotaoResult deleteGatewayBySeriesNumber(String esn);
 	
-	TaotaoResult getGatewayBySeriesNumber(String esn);
+	TbGatewayInfo getGatewayBySeriesNumber(String esn);
+	
+	TbGatewayInfoStat getGatewayStatusStat();
+	
+	TbGatewayInfoStat getGatewayStatusStatByGroupName(String groupName);
 	
 }

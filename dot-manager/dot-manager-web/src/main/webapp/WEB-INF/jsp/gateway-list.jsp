@@ -1,27 +1,52 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <body>
-   <!-- Content Header (Page header) -->
-   <section class="content-header">
-     <h3>
-       Device List
-     </h3>
-   </section>
+
    
    <!-- Main content -->
    <section class="content"> 
-   	<div class="container "  style="width:100%;">
+   
+   <!-- statistic -->
+
+      <!-- min boxes (Stat box) -->
+      <div class="row">
+        <div class="box">
+ 			<div class="box-body no-padding">
+				<table id= "table_stat" class="table table-bordered " data-align="center">
+		     	  <tr class="gray ">
+				    <td ><span class="font_big font_blue "id="total">&nbsp;</span>   Devices</td>
+				    <td ><span class="font_big font_green " id="online">&nbsp;</span>   Online</td> 
+				     <td ><span class="font_big font_red " id="offline">&nbsp;</span>   Offline</td> 
+				     <td ><span class="font_big font_gray "id="unregistered">&nbsp;</span>   Unregistered</td>
+				     
+				  </tr>
+		      </table>
+		  </div>
+		  </div>
+      </div>
+      <!-- /.row -->
+ 
+   
+   <!-- -------table list----- -->
+ 		<div class="row">
    		<div class="box box-primary">
-   		<div class="box-body box-profile"> 
+   		<div class="box-body no-padding"> 
    		<!-- tool bar -->
    	    <div id="toolbar">
    	    <div class="btn-group">
-	        <button id="new" class="btn btn-primary" onClick="TUI.loadFrame('gateway-add')">
+	        <button id="new" class="btn btn-Default" onClick="TUI.loadFrame('gateway-add')">
 	            <i class="glyphicon glyphicon-plus"></i> New
 	        </button>  
 	        <button id="edit" class="btn btn-Default" onClick="editGateway()">
 	            <i class="glyphicon glyphicon-pencil"></i> Edit
-	        </button>    	          
+	        </button>    	
+	        
+	        <button type="button" class="btn btn-Default" data-load-url="devicegroup-select" onClick="addToGroup()"  >
+	            <i class="glyphicon glyphicon-import"></i> Add to Group
+	        </button>  	 
+	        <button id="edit" class="btn btn-Default" onClick="removeToGroup()">
+	            <i class="glyphicon glyphicon-export"></i> Remove to Group
+	        </button>  	 	                         
 	        <button id="remove" class="btn btn-danger"  onClick="deleteGateway()">
 	            <i class="glyphicon glyphicon-remove"></i> Delete
 	        </button>
@@ -53,18 +78,69 @@
    	  </div>
    	  </div>
    	  <!-- ./box -->
-   	</div>
+   	  </div>
+   	  </div>
    </section>   
 
+<!-- begin select modal--------- -->   
+<div class="modal " id="selectModalList" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                 <h4 class="modal-title">Select Group for device</h4>
+            </div>
+            <div class="modal-body"><div class="te"></div></div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Select</button>
+            </div>
+        </div>
+    </div>
+    </div>
+<!-- end modal -->
 
  
 <script>
+//-------- begin modal script ---->
+$('#selectModalList').on('show.bs.modal', function (e) {
+    $(this).find('.modal-body').load("devicegroup-select");
+});
+
+// SELECT MODAL HIDE
+$('#selectModalList').on('hide.bs.modal', function (e) {
+  
+	var select = getDeviceGroupSelections();
+    // update to DB 
+    	var paramJson={
+            "group": select[0],
+            "ids": ids
+        };    
+
+       	$.post("gateway/updateGroup",paramJson, function(data){
+			if(data.status == 200){
+				$('#gatewayList').bootstrapTable('getData');
+				$('#gatewayList').bootstrapTable('refresh');
+			}
+		});    
+    
+  //  $('#groupName').val(select[0]);
+});
+
+
+function getDeviceGroupSelections() {
+    return $.map($('#deviceGroupSelectList').bootstrapTable('getSelections'), function (row) {
+        return row.name;
+    });
+}
+//-------- end modal script ---->
+
     var $table = $('#gatewayList'),
         $remove = $('#remove'),
         selections = [];
+    var ids =[];
     
     function initTable() {
-        $table.bootstrapTable({
+    	$('#gatewayList').bootstrapTable({
    	     dataField: "rows",
          height: getHeight(),
 
@@ -132,25 +208,15 @@
    });
 
 
- /*       
-        $remove.click(function () {
-            var ids = getIdSelections();
-            $table.bootstrapTable('remove', {
-                field: 'id',
-                values: ids
-            });
-            $remove.prop('disabled', true);
-        });
- */
         $(window).resize(function () {
-            $table.bootstrapTable('resetView', {
+        	$('#gatewayList').bootstrapTable('resetView', {
                 height: getHeight()
             });
         });
     }
     
     function getIdSelections() {
-        return $.map($table.bootstrapTable('getSelections'), function (row) {
+        return $.map($('#gatewayList').bootstrapTable('getSelections'), function (row) {
             return row.serialNumber;
         });
     }
@@ -192,22 +258,23 @@
     
     $(function () {
         initTable();
+        initStat();
      });
     
     function getHeight() {
-        return $(window).height() - $('h1').outerHeight(true);
+        return $(window).height() - $('h1').outerHeight(true) -$('#stat').outerHeight(true) -500;
     }
 
 	function formatStatus(value,row,index)
 	{
  		if(value == 1){
- 			return "<span style=\"45px;color:#5ECC49;\">\&#8226</span>"+"<span style=\";\">在线</span>";
+ 			return "<span style=\"45px;color:#5ECC49;\">\&#8226</span>"+"<span style=\";\">Online</span>";
  		}
  		else if(value == 0){
- 			return "<span style=\"display:table-cell;color:#AAAAAA;font-size:30px;\">\&#8226</span>"+"<span style=\"display:table-cell;\">未注册</span>";
+ 			return "<span style=\"display:table-cell;color:#AAAAAA;font-size:30px;\">\&#8226</span>"+"<span style=\"display:table-cell;\">Offline</span>";
  		}
  		else if(value == 2){
- 			return "<span style=\"display:table-cell;vertical-align:middle;height:45px;color:#AAAAAA;font-size:40px;\">\&#8226</span>"+"<span style=\"display:table-cell;vertical-align:middle;height:45px;\">未注册</span>";
+ 			return "<span style=\"display:table-cell;vertical-align:middle;height:45px;color:#AAAAAA;font-size:40px;\">\&#8226</span>"+"<span style=\"display:table-cell;vertical-align:middle;height:45px;\">unregistered</span>";
  		}	 		
  		else{
  			return "未知";
@@ -217,12 +284,12 @@
 		
 	/*format group */
 	function groupFormat(value,row,index){
-		if(value != "Unsigned_Group")
+		if(value != "")
 		{
 			return "<a  style='color:#009AE7' href='/group/detail?name="+value +"'>"+value+"</a>";
 		}
 		else{
-			return "<span >"+value+"</span>";
+			return "<span >Unsigned </span>";
 		}
 	
 	} 
@@ -237,7 +304,7 @@
 	function deleteGateway(){
        	var ids = getIdSelections();
     	if(ids.length == 0){
-    		$("alert").alert();
+    		$().alert('close');
     		return ;
     	}
     	var param = {"ids":ids};
@@ -249,9 +316,7 @@
 	            });
 			}
 		});
-       	
-
-       	return;
+      	return;
     }
 	
 	function editGateway(){
@@ -265,7 +330,51 @@
 
     }
 		
+	function addToGroup(){
+       	ids = getIdSelections();
+    	if(ids.length == 0){
+    		alert("No item selected!");
+    		return ;
+    	}		
+		$('#selectModalList').modal();
+		
+	}
+	
+	function removeToGroup(){
+       	ids = getIdSelections();
+    	if(ids.length == 0){
+    		alert("No item selected!");
+    		return ;
+    	}	
+    	var paramJson={
+                "group":null,
+                "ids": ids
+            };    
 
+           	$.post("gateway/updateGroup",paramJson, function(data){
+    			if(data.status == 200){
+    				$('#gatewayList').bootstrapTable('getData');
+    				$('#gatewayList').bootstrapTable('refresh');
+    			}
+    		});    
+           	return;
+	}
+	
+	// initial statistic box,get data from db
+	function initStat(){
+		$.post("gateway/statistic",null, function(data){
+			if(data.status == 200){
+	       		//disp date
+	       		var tt=0;
+	       		$('#online').text(data.data.online);
+	       		$('#offline').text(data.data.offline);
+	       		$('#unregistered').text(data.data.unregistered);
+	       		$('#total').text(data.data.unregistered+data.data.offline+data.data.online);
+			}
+		});		
+		
+	}
+	
 
 </script>
 </body>

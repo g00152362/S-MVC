@@ -5,15 +5,14 @@ import java.util.List;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-/**
- * 淘淘商城自定义响应结构
- */
+
 public class TaotaoResult {
 
     // 定义jackson对象
     private static final ObjectMapper MAPPER = new ObjectMapper();
     public static final int SUCCESS = 200;
-
+    public static final int OBJ_IS_NOT_EXSIT = 100;
+    public static final int OBJ_IS_EXSIT = 101;
     // 响应业务状态
     private Integer status;
 

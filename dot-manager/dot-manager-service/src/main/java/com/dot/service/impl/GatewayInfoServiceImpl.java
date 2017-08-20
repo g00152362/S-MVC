@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.dot.mapper.TbGatewayInfoMapper;
 import com.dot.pojo.TbGatewayInfo;
 import com.dot.pojo.TbGatewayInfoExample;
+import com.dot.pojo.TbGatewayInfoStat;
 import com.dot.service.GatewayInfoService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -37,7 +38,9 @@ public class GatewayInfoServiceImpl implements GatewayInfoService {
 		item.setCreated(new Date());
 	//	item.setReportTime(new Date());
 	//	item.setUpdatedTime(new Date());
+		
 		itemMapper.insert(item);
+		
 		return TaotaoResult.ok();
 	}
 	
@@ -82,7 +85,6 @@ public class GatewayInfoServiceImpl implements GatewayInfoService {
 		//get current time
 		Date cur = new Date();
 		Date rpt = item.getReportTime();
-		Date crt = item.getCreated();
 
 		if(rpt == null )
 		{
@@ -137,15 +139,23 @@ public class GatewayInfoServiceImpl implements GatewayInfoService {
 	}
 
 	@Override
-	public TaotaoResult getGatewayBySeriesNumber(String esn) {
+	public TbGatewayInfo getGatewayBySeriesNumber(String esn) {
 		// TODO Auto-generated method stub
 		TbGatewayInfo item = itemMapper.selectByPrimaryKey(esn);
-		
-		item.setStatus(caluStatus(item));		
-		TaotaoResult result = new TaotaoResult();
-		result.setData(item);
-		result.setStatus(TaotaoResult.SUCCESS);
-		return result;
+
+		return item;
+	}
+
+	@Override
+	public TbGatewayInfoStat getGatewayStatusStat() {
+		// TODO Auto-generated method stub
+		return itemMapper.countAllStat();
+	}
+
+	@Override
+	public TbGatewayInfoStat getGatewayStatusStatByGroupName(String groupName) {
+		// TODO Auto-generated method stub
+		return itemMapper.countStatByGroupName(groupName);
 	}
 	
 

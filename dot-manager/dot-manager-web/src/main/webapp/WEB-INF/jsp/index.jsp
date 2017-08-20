@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 2 | Dashboard</title>
+  <title>IoT Platform</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
@@ -29,10 +29,12 @@
   <!-- Bootstrap table &editable  -->
   
   <link rel="stylesheet" href="/web/AdminLTE/bower_components/bootstrap-table-master/dist/bootstrap-table.min.css">
+  <!--  table edit use
   <link rel="stylesheet" href="//rawgit.com/vitalets/x-editable/master/dist/bootstrap3-editable/css/bootstrap-editable.css">
-  <!-- my application 
-  <link rel="stylesheet" href="/web/css/gateway_detail.css">  
--->
+   -->
+  <!-- my application -->
+  <link rel="stylesheet" href="/css/iot.css">  
+
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -338,7 +340,7 @@
           </a>
           <ul class="treeview-menu">
             <li><a href="#" onClick="TUI.loadFrame('gateway-list')"><i class="fa fa-circle-o"></i> Device </a></li>
-            <li><a href="pages/layout/boxed.html"><i class="fa fa-circle-o"></i> Group</a></li>
+            <li><a href="#" onClick="TUI.loadFrame('devicegroup-list')"><i class="fa fa-circle-o"></i> Group</a></li>
 
 
           </ul>
@@ -533,7 +535,9 @@
 <!--  bootstrap table-->
 <script src="/web/AdminLTE/bower_components/bootstrap-table-master/dist/bootstrap-table.min.js"></script>
 <script src="/web/AdminLTE/bower_components/bootstrap-table-master/src/extensions/editable/bootstrap-table-editable.js"></script>
+<!--  
 <script src="//rawgit.com/vitalets/x-editable/master/dist/bootstrap3-editable/js/bootstrap-editable.js"></script>
+-->
 <!--  jquery form validation-->
 <script src="/web/AdminLTE/bower_components/jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
 <!-- AdminLTE App -->

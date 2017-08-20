@@ -2,6 +2,8 @@ package com.dot.mapper;
 
 import com.dot.pojo.TbGatewayInfo;
 import com.dot.pojo.TbGatewayInfoExample;
+import com.dot.pojo.TbGatewayInfoStat;
+
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
@@ -27,4 +29,8 @@ public interface TbGatewayInfoMapper {
     int updateByPrimaryKeySelective(TbGatewayInfo record);
 
     int updateByPrimaryKey(TbGatewayInfo record);
+    
+    TbGatewayInfoStat countAllStat();
+    
+    TbGatewayInfoStat countStatByGroupName(String groupName);
 }

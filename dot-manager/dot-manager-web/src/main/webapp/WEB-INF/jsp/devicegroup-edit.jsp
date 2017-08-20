@@ -4,7 +4,7 @@
    <!-- Content Header (Page header) -->
    <section class="content-header">
      <h3>
-       <i class="glyphicon glyphicon-pencil"></i> Modify Device
+       <i class="glyphicon glyphicon-pencil"> </i>Modify Device Group
      </h3>
    </section>
    
@@ -13,53 +13,27 @@
 	<div class="container "  style="width:100%;">
     	<div class="row">   
     		<div class="col-md-10 col-md-offset-1">
-			<form id="gatewayEditForm"  role="form" class="form-horizontal"  method="post">    		
+			<form id="deviceGroupEditForm"  role="form" class="form-horizontal"  method="post">    		
     		<div class="box box-primary ">
     		      <div class="box-body">
     		         <!-- form start -->
             		
-		                <div class="form-group">
-		                  <label for="esn" class="col-sm-2 control-label">Esn:</label>
+     				 <div class="form-group">
+		                  <label for="name" class="col-sm-2 control-label">Name:</label>
 		                  <div class="col-sm-8">
-		                    <input type="text" class="form-control " name="serialNumber" id="serialNumber" readonly>
-		                  </div>
-		                </div>   
-		                
-		                <div class="form-group">
-		                  <label for="devicename" class="col-sm-2 control-label">Name:</label>
-		                  <div class="col-sm-8">
-		                    <input type="text" class="form-control" name="deviceName" id="deviceName" placeholder="Device name">
-		                  </div>
-		                </div>  
-		                
-		                <div class="form-group">
-		                  <label for="type" class="col-sm-2 control-label">Type:</label>
-		                  <div class="col-sm-8">
-		                    <input type="text" class="form-control" id="type" placeholder="Device model type">
-		                  </div>
-		                </div>  
-		                
-		                <div class="form-group">
-		                  <label for="devicegroup" class="col-sm-2 control-label">Group:</label>
-		                  <div class="col-sm-8">
-		                    <input type="text" class="form-control" id="devicegroup" placeholder="Device in group name">
-		                  </div>
-		                </div>  
-		                <div class="form-group">
-		                  <label for="type" class="col-sm-2 control-label">Location:</label>
-		                  <div class="col-sm-8">
-		                    <input type="text" class="form-control" id="position" placeholder="Device install location">
+		                    <input type="text" class="form-control" name="name" id="name" placeholder="Device name">
 		                  </div>
 		                </div>  
 
 		                <div class="form-group">
 		                  <label for="description" class="col-sm-2 control-label">Description:</label>
 		                  <div class="col-sm-8">
-		                    <textarea class="form-control" rows="3" id="description" placeholder="Device description">
+		                    <textarea class="form-control" rows="3"name="description" id="description" placeholder="Device description">
 		                    </textarea>
 		                  </div>
 		                </div>  
-            		
+		                <!-- id field hide -->  
+						<input type="hidden" name="id" id="id"  value="value">            		
     		      </div>
     		      <!--box body -->
 	              <div class="box-footer">
@@ -87,7 +61,8 @@
 <script type="text/javascript">
 
 $().ready(function() {
-	$.getJSON("gateway/listid?esn=${param.esn}",
+
+	$.getJSON("deviceGroup/listid?id=${param.id}",
 			function(data){
 				if(data.status != 200){
 					alert("get data fail!");
@@ -96,14 +71,12 @@ $().ready(function() {
 				loadDate(data.data);
 		}); 	
 	
-	 $("#gatewayEditForm").validate({
+	 $("#deviceGroupEditForm").validate({
 	        rules : {
-	        	serialNumber: "required",
-	            deviceName: "required",
+	        	name: "required",
 	        },		 
 	        messages: {
-	        	serialNumber: "ESN required",
-	            deviceName: "Name required",
+	            name: "Name required",
 	        },
 	        errorPlacement : function(error, element) {
 	            element.next().remove();//删除显示图标
@@ -115,9 +88,12 @@ $().ready(function() {
 	            $(element).closest('.form-group').addClass('has-error has-feedback');
 	        },	        
 	        submitHandler :function(form){
-		        	$.post("/rest/gateway/update",$("#gatewayEditForm").serialize(), function(data){
+		        	$.post("/deviceGroup/update",$("#deviceGroupEditForm").serialize(), function(data){
         			if(data.status == 200){
-        				 TUI.loadFrame('gateway-list');
+        				 TUI.loadFrame('devicegroup-list');
+        			}
+        			else{
+        				console.log("error update the device group data!");
         			}
         		});
 	        }    
@@ -125,7 +101,7 @@ $().ready(function() {
 	});
 	
 	function loadDate(data){
-		var FormObject = document.forms['gatewayEditForm'];
+		var FormObject = document.forms['deviceGroupEditForm'];
 		$.each(data, function(key, val) { 
 			console.log(key +  val);
 			//FormObject.elements["serialNumber"].value="12345";
@@ -133,16 +109,16 @@ $().ready(function() {
 				FormObject.elements[key].value=val;
 			}
 		});
-		
+		FormObject.elements["id"]=${param.id};
 		
 	}
 
 	function clearForm(){
-		$('#gatewayAddForm').form('reset');
+		$('#deviceGroupEditForm').form('reset');
 	}
 	
 	function cancelEdit(){
-		TUI.loadFrame('gateway-list');
+		TUI.loadFrame('devicegroup-list');
 	}
 	
 

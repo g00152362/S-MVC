@@ -4,7 +4,7 @@
    <!-- Content Header (Page header) -->
    <section class="content-header">
      <h3>
-       Device Profile
+        <i class="glyphicon glyphicon-random"></i>   Device Profile
      </h3>
    </section>
 
