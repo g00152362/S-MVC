@@ -85,7 +85,7 @@
              field: "name",//键名
              width: 180,
              valign: 'middle',   
-             formatter: groupnameFormat,             
+ //            formatter: groupnameFormat,             
  //            editable: true
          },
 
