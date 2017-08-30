@@ -9,4 +9,20 @@
 <fullyQualifiedTypeName name="javax.jms.BytesMessage"/>
 <fullyQualifiedTypeName name="java.sql.Date"/>
 <fullyQualifiedTypeName name="java.util.Date"/>
+<fullyQualifiedTypeName name="dot.com.common.pojo.EUDataGridResult"/>
+<fullyQualifiedTypeName name="org.springframework.stereotype.Service"/>
+<fullyQualifiedTypeName name="com.dot.mapper.TbDeviceGroupMapper"/>
+<fullyQualifiedTypeName name="com.dot.service.DeviceGroupService"/>
+<fullyQualifiedTypeName name="com.dot.pojo.TbDeviceGroupExample"/>
+<fullyQualifiedTypeName name="com.dot.pojo.TbDeviceGroup"/>
+<fullyQualifiedTypeName name="com.dot.service.GatewayInfoService"/>
+<fullyQualifiedTypeName name="com.dot.mapper.TbGatewayInfoMapper"/>
+<fullyQualifiedTypeName name="com.dot.pojo.TbGatewayInfoStat"/>
+<fullyQualifiedTypeName name="org.springframework.stereotype.Controller"/>
+<fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestMapping"/>
+<fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PathVariable"/>
+<fullyQualifiedTypeName name="dot.com.common.result.TaotaoResult"/>
+<fullyQualifiedTypeName name="com.dot.pojo.TbGatewayInfoExample"/>
+<fullyQualifiedTypeName name="com.dot.pojo.TbGatewayInfoExample.Criteria"/>
+<fullyQualifiedTypeName name="com.dot.pojo.TbGatewayInfo"/>
 </qualifiedTypeNameHistroy>

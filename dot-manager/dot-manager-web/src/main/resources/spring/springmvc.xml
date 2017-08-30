@@ -23,8 +23,8 @@
  	<mvc:resources location="/WEB-INF/css/" mapping="/css/**"/>
 	<mvc:resources location="/WEB-INF/js/" mapping="/js/**"/>
 	<mvc:resources location="/WEB-INF/images/" mapping="/images/**"/>
-	<mvc:resources location="/WEB-INF/web/" mapping="/web/**"/>
-
+	<mvc:resources location="/WEB-INF/pages/" mapping="/pages/**"/>
+	<mvc:resources location="/WEB-INF/pages/assert" mapping="/assert/**"/>
 	<!-- 定义文件上传解析器 -->
 
 	<bean id="multipartResolver"

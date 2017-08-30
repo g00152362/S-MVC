@@ -234,6 +234,26 @@
       <include refid="Example_Where_Clause" />
     </if>
   </select>
+  
+<!-- my todo: statistic online and offline device -->
+    <select id="countAllStat" resultType="com.dot.pojo.TbGatewayInfoStat" >
+       select
+        (select count(*) FROM tb_gateway_info WHERE updated_time is NULL) AS  unregistered ,
+        (SELECT COUNT(*) FROM tb_gateway_info WHERE TIMESTAMPDIFF(MINUTE,updated_time,NOW()) &lt; 10 AND updated_time is not NULL) AS online,
+        (SELECT COUNT(*) FROM tb_gateway_info WHERE TIMESTAMPDIFF(MINUTE,updated_time,NOW()) &gt;= 10 AND updated_time is NOT NULL) AS offline
+  </select>
+  
+  <!-- my todo: statistic online and offline device --> 
+    <select id="countStatByGroupName" resultType="com.dot.pojo.TbGatewayInfoStat" parameterType="java.lang.String" >
+       select
+        (select count(*) FROM tb_gateway_info WHERE updated_time is NULL AND group_Name = #{groupName,jdbcType=VARCHAR}) AS  unregistered ,
+        (SELECT COUNT(*) FROM tb_gateway_info WHERE TIMESTAMPDIFF(MINUTE,updated_time,NOW()) &lt; 10 AND updated_time is not NULL AND group_Name = #{groupName,jdbcType=VARCHAR}) AS online,
+        (SELECT COUNT(*) FROM tb_gateway_info WHERE TIMESTAMPDIFF(MINUTE,updated_time,NOW()) &gt;= 10 AND updated_time is NOT NULL AND group_Name = #{groupName,jdbcType=VARCHAR}) AS offline
+  </select>
+<!-- end my todo -->  
+  
+  
+  
   <update id="updateByExampleSelective" parameterType="map" >
     update tb_gateway_info
     <set >

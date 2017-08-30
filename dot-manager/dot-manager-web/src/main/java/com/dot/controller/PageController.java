@@ -14,7 +14,7 @@ public class PageController {
     //首页
     @RequestMapping("/")
     public  String showIndex(){
-        return "index";
+        return "redirect:/pages/index.html";
     }
 
     //展示其他页面
@@ -22,4 +22,10 @@ public class PageController {
     public String showPage(@PathVariable String page){
         return page;
     }
+    
+    //展示其他页面
+    @RequestMapping("/staticPage/{page}")
+    public String showStaticPage(@PathVariable String page){
+        return "redirect:/pages"+page;
+    }    
 }

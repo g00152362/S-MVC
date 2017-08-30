@@ -47,9 +47,6 @@ public class gatewayDeviceInfoTopicListener implements  MessageListener {
             		sm = new String(b, 0, len);
             		LOG.info(sm);  
 		            TbGatewayInfo item;
-	           
-		            
-            
 		            item = (TbGatewayInfo) JsonUtils.jsonString2Object(sm, TbGatewayInfo.class);
 		            item.setUpdatedTime(new Date());	
 		            gatewayInfoService.updateRunGatewayInfo(item);		            

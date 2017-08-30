@@ -145,6 +145,8 @@ public class GatewayInfoServiceImpl implements GatewayInfoService {
 	public TbGatewayInfo getGatewayBySeriesNumber(String esn) {
 		// TODO Auto-generated method stub
 		TbGatewayInfo item = itemMapper.selectByPrimaryKey(esn);
+		
+		item.setStatus(caluStatus(item));
 
 		return item;
 	}

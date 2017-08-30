@@ -62,7 +62,7 @@ public class GatewayInfoController {
 		return TaotaoResult.ok();
 	}
 	
-	@RequestMapping(value = "/gateway/delete", method = RequestMethod.POST)	
+	@RequestMapping(value = "gateway/delete", method = RequestMethod.POST)	
 	@ResponseBody
 	public TaotaoResult deleteGateway(@RequestParam("ids[]")String[] ids){
 
@@ -105,8 +105,7 @@ public class GatewayInfoController {
 		
 	}
 
-	
-	@RequestMapping("/gateway/listid")
+	@RequestMapping("/pages/gateway/listid")
 	@ResponseBody
 	public TaotaoResult getGatewayListid( String esn){
 		TaotaoResult result = new TaotaoResult();
@@ -126,8 +125,15 @@ public class GatewayInfoController {
 	@RequestMapping("/gateway/listBygroupName")
 	@ResponseBody
 	public EUDataGridResult getGatewayListByGroupName( String name){
-
-		EUDataGridResult result = itemService.getGatewayListByGroupName(name);
+		
+		EUDataGridResult result;
+		if (name==null){
+			result = new EUDataGridResult();
+			result.setTotal(0);
+			return result;
+		}
+		
+		result = itemService.getGatewayListByGroupName(name);
 
 		return result;
 	}	
@@ -160,6 +166,8 @@ public class GatewayInfoController {
 		return TaotaoResult.ok();
 		
 	}
+	
+	
 	
 
 }
