@@ -1,11 +1,11 @@
-var dg_add = dg_add || {};
+var dm_add = dm_add || {};
 
 ;(function($, window, undefined){
 	
 	"use strict";
 	$(document).ready(function()
 	{
-		dg_add.$form =  $('#deviceGroupAddForm');
+		dm_add.$form =  $('#deviceModelAddForm');
 
 	  	initform();
 
@@ -15,12 +15,12 @@ var dg_add = dg_add || {};
 
 
 	function initform()	{
-	 	dg_add.$form.validate({
+	 	dm_add.$form.validate({
 		        rules : {
 		        	name: "required",
 		        },		 
 		        messages: {
-		        	name: "Group Name required",
+		        	name: "Model Name required",
 		        },
 		        errorPlacement : function(error, element) {
 		            element.next().remove();//删除显示图标
@@ -32,9 +32,9 @@ var dg_add = dg_add || {};
 		            $(element).closest('.form-group').addClass('has-error has-feedback');
 		        },	        
 		        submitHandler :function(form){
-			        	$.post("/deviceGroup/add",dg_add.$form.serialize(), function(data){
+			        	$.post("/deviceModel/add",dm_add.$form.serialize(), function(data){
 	        			if(data.status == 200){
-	        				IotLoadFrame('devicegroup-list.html');
+	        				IotLoadFrame('devicemodel-list.html');
 	        			}
 	        		});
 		        }    
@@ -44,6 +44,6 @@ var dg_add = dg_add || {};
 
 	
 	function cancelAdd(){
-		IotLoadFrame('devicegroup-list.html');
+		IotLoadFrame('devicemodel-list.html');
 	}
 	

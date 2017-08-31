@@ -27,14 +27,10 @@ var dm_list = dm_list || {};
 			     align:'center',             
 			
 			 },
-			 {
-			     title: "id",
-			     field: "id", 
-			     visible:false,
-			 },         
+      
 			 {
 			     title: "Name",
-			     field: "name",
+			     field: "id",
 			     width: 180,
 			     valign: 'middle',   
 			     formatter: ModelnameFormat,             

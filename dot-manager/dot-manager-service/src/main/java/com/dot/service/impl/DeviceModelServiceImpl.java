@@ -24,8 +24,8 @@ public class DeviceModelServiceImpl implements DeviceModelService{
 
 	@Override
 	public TaotaoResult createDeviceModel(TbDeviceModel deviceModel) {
-		// TODO Auto-generated method stub
-		return null;
+		itemMapper.insert(deviceModel); 		
+		return TaotaoResult.ok();
 	}
 
 	@Override

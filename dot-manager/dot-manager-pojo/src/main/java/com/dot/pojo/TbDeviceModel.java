@@ -1,9 +1,7 @@
 package com.dot.pojo;
 
 public class TbDeviceModel {
-    private Integer id;
-
-    private String name;
+    private String id;
 
     private String description;
 
@@ -21,20 +19,12 @@ public class TbDeviceModel {
 
     private String photo;
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
+    public void setId(String id) {
+        this.id = id == null ? null : id.trim();
     }
 
     public String getDescription() {

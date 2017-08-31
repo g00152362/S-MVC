@@ -10,7 +10,7 @@ public interface TbDeviceModelMapper {
 
     int deleteByExample(TbDeviceModelExample example);
 
-    int deleteByPrimaryKey(Integer id);
+    int deleteByPrimaryKey(String id);
 
     int insert(TbDeviceModel record);
 
@@ -18,7 +18,7 @@ public interface TbDeviceModelMapper {
 
     List<TbDeviceModel> selectByExample(TbDeviceModelExample example);
 
-    TbDeviceModel selectByPrimaryKey(Integer id);
+    TbDeviceModel selectByPrimaryKey(String id);
 
     int updateByExampleSelective(@Param("record") TbDeviceModel record, @Param("example") TbDeviceModelExample example);
 
