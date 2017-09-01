@@ -1,21 +1,6 @@
-var dm_add = dm_add || {};
 
-;(function($, window, undefined){
-	
-	"use strict";
-	$(document).ready(function()
-	{
-		dm_add.$form =  $('#deviceModelAddForm');
-
-	  	initform();
-
-	});
-	
-})(jQuery, window);
-
-
-	function initform()	{
-	 	dm_add.$form.validate({
+	function validateForm(form,submitFunction)	{
+	 	form.validate({
 		        rules : {
 		        	id: "required",
 		        	os:"required",
@@ -45,19 +30,8 @@ var dm_add = dm_add || {};
 		        highlight : function(element) {
 		            $(element).closest('.form-group').addClass('has-error has-feedback');
 		        },	        
-		        submitHandler :function(form){
-			        	$.post("/deviceModel/add",dm_add.$form.serialize(), function(data){
-	        			if(data.status == 200){
-	        				IotLoadFrame('devicemodel-list.html');
-	        			}
-	        		});
-		        }    
+		        submitHandler :submitFunction,
+		          
 		    });
 		};
 
-
-	
-	function cancelAdd(){
-		IotLoadFrame('devicemodel-list.html');
-	}
-	

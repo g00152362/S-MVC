@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.dot.pojo.TbDeviceGroup;
 import com.dot.pojo.TbDeviceModel;
 import com.dot.service.DeviceModelService;
 
@@ -36,6 +37,37 @@ public class DeviceModelController {
 		
 		itemService.createDeviceModel(dmInfo);
 		return TaotaoResult.ok();
-	}	
+	}
+	
+	
+	@RequestMapping(value = "/deviceModel/delete", method = RequestMethod.POST)	
+	@ResponseBody
+	public TaotaoResult deleteDeviceGroup(@RequestParam("ids[]")String[] ids){
 
+		for (int i = 0; i < ids.length; i++) {
+
+			itemService.deleteDeviceModelById(ids[i]);
+
+		}
+		return TaotaoResult.ok();
+	}
+	
+	
+	@RequestMapping(value = "/deviceModel/update",method = RequestMethod.POST)	
+	@ResponseBody
+	public TaotaoResult updateDeviceModel(TbDeviceModel dmInfo){
+		TaotaoResult result = itemService.updateDeviceModel(dmInfo);
+		result.setStatus(TaotaoResult.SUCCESS);
+		return result;
+		
+	}
+	
+	@RequestMapping("/deviceModel/listid")
+	@ResponseBody
+	public TaotaoResult getGatewayListid(@RequestParam("id") String index){
+		TaotaoResult result = itemService.getDeviceModelDetailById(index);
+		return result;
+
+	}	
+	
 }

@@ -7,6 +7,57 @@ var dm_list = dm_list || {};
 	{
 		dm_list.$table =  $('#deviceModelList');
 		dm_list.$selctions=[];
+
+		
+		$.extend(dm_list, {
+
+			getIdSelections:function () {
+				return $.map(dm_list.$table.bootstrapTable('getSelections'), function (row) {
+				    return row.id;
+					});
+			},	
+			
+			/*
+			 *  delete device model process
+			 */
+			deleteDeviceModel : function (){
+				var ids = dm_list.getIdSelections();
+				if(ids.length == 0){
+					alert("please select items to delete");
+					return ;
+				}
+				var param = {"ids":ids};
+					$.post("/deviceModel/delete",param, function(data){
+					if(data.status == 200){
+						dm_list.$table.bootstrapTable('remove', {
+				            field: 'id',
+				            values: ids
+				        });
+					}
+				});
+				return;
+			},	
+			
+			/*
+			 *  edit model process
+			 */
+			editModel:function(){
+				var ids = dm_list.getIdSelections();
+				if( ids.length != 1 ){
+					alert("please select an item to edit");
+					return ;
+				}
+				
+				localStorage['Model-id'] = ids[0];
+				IotLoadFrame("devicemodel-edit.html?id="+ids[0]);
+				return;
+			},
+		
+		});
+		
+		
+
+		
 		initTable();
 
 	});
@@ -90,11 +141,7 @@ var dm_list = dm_list || {};
 		});
 	}
 
-	function getIdSelections() {
-		return $.map(dm_list.$table.bootstrapTable('getSelections'), function (row) {
-		    return row.id;
-			});
-	}
+
 	
 	function responseHandler(res) {
 		$.each(res.rows, function (i, row) {
@@ -138,35 +185,10 @@ var dm_list = dm_list || {};
 		return $(window).height() - $('h1').outerHeight(true);
 	}
 
-	function deleteDeviceModel(){
-		var ids = getIdSelections();
-		if(ids.length == 0){
-			alert("please select items to delete");
-			return ;
-		}
-		var param = {"ids":ids};
-			$.post("/deviceModel/delete",param, function(data){
-			if(data.status == 200){
-				dm_list.$table.bootstrapTable('remove', {
-		            field: 'id',
-		            values: ids
-		        });
-			}
-		});
-		return;
-	}
 
-	function editModel(){
-		var ids = getIdSelections();
-		if( ids.length != 1 ){
-			alert("please select an item to edit");
-			return ;
-		}
-		
-		localStorage['Model-id'] = ids[0];
-		IotLoadFrame("deviceModel-edit.html?id="+ids[0]);
-		return;
-	}
+
+
+
 	
 	/*format Byte Unit */
 	function byteUnitFormat(value,row,index){

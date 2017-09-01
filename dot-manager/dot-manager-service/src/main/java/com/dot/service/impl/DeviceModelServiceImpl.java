@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 
 import com.dot.mapper.TbDeviceModelMapper;
+import com.dot.pojo.TbDeviceGroup;
 import com.dot.pojo.TbDeviceModel;
 import com.dot.pojo.TbDeviceModelExample;
 import com.dot.service.DeviceModelService;
@@ -31,20 +32,16 @@ public class DeviceModelServiceImpl implements DeviceModelService{
 	@Override
 	public TaotaoResult updateDeviceModel(TbDeviceModel deviceModel) {
 		// TODO Auto-generated method stub
-		return null;
+		itemMapper.updateByPrimaryKey(deviceModel);
+		return TaotaoResult.ok();
 	}
 
 	@Override
-	public TaotaoResult deleteDeviceModelById(int modelId) {
-		// TODO Auto-generated method stub
-		return null;
+	public TaotaoResult deleteDeviceModelById(String modelId) {
+		itemMapper.deleteByPrimaryKey(modelId);
+		return TaotaoResult.ok();
 	}
 
-	@Override
-	public TaotaoResult deleteDeviceModelByName(String modelName) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	public EUDataGridResult getDeviceModelList(Integer page, Integer rows) {
@@ -72,15 +69,16 @@ public class DeviceModelServiceImpl implements DeviceModelService{
 	}
 
 	@Override
-	public TaotaoResult getDeviceModelDetailById(int modelId) {
+	public TaotaoResult getDeviceModelDetailById(String modelId) {
 		// TODO Auto-generated method stub
-		return null;
+		TaotaoResult result = new TaotaoResult();
+		TbDeviceModel item =itemMapper.selectByPrimaryKey(modelId);
+		
+		result.setData(item);
+		result.setStatus(TaotaoResult.SUCCESS);		
+		return result;
 	}
 
-	@Override
-	public TbDeviceModel getDeviceModelDetailByName(String modelName) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 
 }
