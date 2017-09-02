@@ -2,8 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.dot.mapper.TbDeviceModelMapper" >
   <resultMap id="BaseResultMap" type="com.dot.pojo.TbDeviceModel" >
-    <id column="ID" property="id" jdbcType="INTEGER" />
-    <result column="name" property="name" jdbcType="VARCHAR" />
+    <id column="id" property="id" jdbcType="VARCHAR" />
     <result column="description" property="description" jdbcType="VARCHAR" />
     <result column="OS" property="os" jdbcType="VARCHAR" />
     <result column="processor" property="processor" jdbcType="VARCHAR" />
@@ -72,7 +71,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    ID, name, description, OS, processor, core_number, memory, storage, icon, photo
+    id, description, OS, processor, core_number, memory, storage, icon, photo
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.dot.pojo.TbDeviceModelExample" >
     select
@@ -88,15 +87,15 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
     from tb_device_model
-    where ID = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from tb_device_model
-    where ID = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
   </delete>
   <delete id="deleteByExample" parameterType="com.dot.pojo.TbDeviceModelExample" >
     delete from tb_device_model
@@ -105,23 +104,20 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.dot.pojo.TbDeviceModel" >
-    insert into tb_device_model (ID, name, description, 
-      OS, processor, core_number, 
-      memory, storage, icon, 
-      photo)
-    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
-      #{os,jdbcType=VARCHAR}, #{processor,jdbcType=VARCHAR}, #{coreNumber,jdbcType=INTEGER}, 
-      #{memory,jdbcType=INTEGER}, #{storage,jdbcType=INTEGER}, #{icon,jdbcType=VARCHAR}, 
-      #{photo,jdbcType=VARCHAR})
+    insert into tb_device_model (id, description, OS, 
+      processor, core_number, memory, 
+      storage, icon, photo
+      )
+    values (#{id,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{os,jdbcType=VARCHAR}, 
+      #{processor,jdbcType=VARCHAR}, #{coreNumber,jdbcType=INTEGER}, #{memory,jdbcType=INTEGER}, 
+      #{storage,jdbcType=INTEGER}, #{icon,jdbcType=VARCHAR}, #{photo,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.dot.pojo.TbDeviceModel" >
     insert into tb_device_model
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
-        ID,
-      </if>
-      <if test="name != null" >
-        name,
+        id,
       </if>
       <if test="description != null" >
         description,
@@ -150,10 +146,7 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="name != null" >
-        #{name,jdbcType=VARCHAR},
+        #{id,jdbcType=VARCHAR},
       </if>
       <if test="description != null" >
         #{description,jdbcType=VARCHAR},
@@ -191,10 +184,7 @@
     update tb_device_model
     <set >
       <if test="record.id != null" >
-        ID = #{record.id,jdbcType=INTEGER},
-      </if>
-      <if test="record.name != null" >
-        name = #{record.name,jdbcType=VARCHAR},
+        id = #{record.id,jdbcType=VARCHAR},
       </if>
       <if test="record.description != null" >
         description = #{record.description,jdbcType=VARCHAR},
@@ -227,8 +217,7 @@
   </update>
   <update id="updateByExample" parameterType="map" >
     update tb_device_model
-    set ID = #{record.id,jdbcType=INTEGER},
-      name = #{record.name,jdbcType=VARCHAR},
+    set id = #{record.id,jdbcType=VARCHAR},
       description = #{record.description,jdbcType=VARCHAR},
       OS = #{record.os,jdbcType=VARCHAR},
       processor = #{record.processor,jdbcType=VARCHAR},
@@ -244,9 +233,6 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.dot.pojo.TbDeviceModel" >
     update tb_device_model
     <set >
-      <if test="name != null" >
-        name = #{name,jdbcType=VARCHAR},
-      </if>
       <if test="description != null" >
         description = #{description,jdbcType=VARCHAR},
       </if>
@@ -272,12 +258,11 @@
         photo = #{photo,jdbcType=VARCHAR},
       </if>
     </set>
-    where ID = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.dot.pojo.TbDeviceModel" >
     update tb_device_model
-    set name = #{name,jdbcType=VARCHAR},
-      description = #{description,jdbcType=VARCHAR},
+    set description = #{description,jdbcType=VARCHAR},
       OS = #{os,jdbcType=VARCHAR},
       processor = #{processor,jdbcType=VARCHAR},
       core_number = #{coreNumber,jdbcType=INTEGER},
@@ -285,6 +270,6 @@
       storage = #{storage,jdbcType=INTEGER},
       icon = #{icon,jdbcType=VARCHAR},
       photo = #{photo,jdbcType=VARCHAR}
-    where ID = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
   </update>
 </mapper>

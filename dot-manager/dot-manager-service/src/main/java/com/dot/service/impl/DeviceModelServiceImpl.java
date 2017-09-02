@@ -10,6 +10,7 @@ import com.dot.mapper.TbDeviceModelMapper;
 import com.dot.pojo.TbDeviceGroup;
 import com.dot.pojo.TbDeviceModel;
 import com.dot.pojo.TbDeviceModelExample;
+import com.dot.pojo.TbDeviceModelExample.Criteria;
 import com.dot.service.DeviceModelService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -25,8 +26,22 @@ public class DeviceModelServiceImpl implements DeviceModelService{
 
 	@Override
 	public TaotaoResult createDeviceModel(TbDeviceModel deviceModel) {
-		itemMapper.insert(deviceModel); 		
-		return TaotaoResult.ok();
+		// if the name is exist,return the error code
+		TbDeviceModelExample ex = new TbDeviceModelExample();
+		Criteria cr = ex.createCriteria();
+		cr.andIdEqualTo(deviceModel.getId());
+		int count = itemMapper.countByExample(ex);
+		
+		System.out.println(count);
+		if(count == 0  ){
+			itemMapper.insert(deviceModel); 
+			return TaotaoResult.ok();
+		}
+		else
+		{
+			return TaotaoResult.error(TaotaoResult.OBJ_IS_EXSIT);
+		}
+		
 	}
 
 	@Override
@@ -77,6 +92,15 @@ public class DeviceModelServiceImpl implements DeviceModelService{
 		result.setData(item);
 		result.setStatus(TaotaoResult.SUCCESS);		
 		return result;
+	}
+
+	@Override
+	public int countDeviceModelByName(String modelId) {
+		TbDeviceModelExample ex = new TbDeviceModelExample();
+		Criteria cr = ex.createCriteria();
+		cr.andIdEqualTo(modelId);
+		int count = itemMapper.countByExample(ex);
+		return count;
 	}
 
 

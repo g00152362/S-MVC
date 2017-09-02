@@ -54,7 +54,28 @@ function formatRebootReason(val,row){
  
  };
  
- localStorage['device_select'] = "";
+ //ERROR CODE PROCESS, multi-lang modify here
+ function IotErrorMsg(errorCode){
+	 var errMsg="";
+	 switch(errorCode){
+	 case 200:
+		 errMsg = "Success";
+		 break; 
+	 case 100:
+		 errMsg = "The item is not exist";
+		 break; 
+	 case 101:
+		 errMsg = "The item is existed";
+		 break; 
+	default:
+		 errMsg = "Unknow code";
+		 break; 			 
+	 };
+	 
+	 alert(errMsg);
+ }
+ 
+
  
 
 

@@ -70,4 +70,15 @@ public class DeviceModelController {
 
 	}	
 	
+	@RequestMapping("/deviceModel/checkname")
+	@ResponseBody
+	public TaotaoResult checkIdExisted(@RequestParam("id") String index){
+		int count = itemService.countDeviceModelByName(index);
+		if(count == 0){
+			return TaotaoResult.ok();
+		}else{
+			return TaotaoResult.error(TaotaoResult.OBJ_IS_EXSIT);
+		}
+	}		
+	
 }

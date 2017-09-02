@@ -33,6 +33,12 @@ public class TaotaoResult {
     public static TaotaoResult ok() {
         return new TaotaoResult(null);
     }
+    
+    public static TaotaoResult error(int errorCode) {
+    	TaotaoResult result = new TaotaoResult();
+    	result.setStatus(errorCode);
+        return result;
+    }
 
     public TaotaoResult() {
 

@@ -12,5 +12,6 @@ public interface DeviceModelService {
 	TaotaoResult deleteDeviceModelById(String modelId);
 	EUDataGridResult getDeviceModelList(Integer page,Integer rows);
 	TaotaoResult getDeviceModelDetailById(String modelId);
+	int countDeviceModelByName(String modelId);
 
 }

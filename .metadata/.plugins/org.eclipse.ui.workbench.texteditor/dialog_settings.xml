@@ -2,22 +2,24 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="responseHandler" key="selection"/>
+		<item value="selectByPrimaryKey" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
-			<item value="responseHandler"/>
-			<item value="img"/>
-			<item value="select"/>
-			<item value="selecte"/>
-			<item value="selected"/>
-			<item value="listBygroupName"/>
-			<item value="tag"/>
-			<item value="bootstrap-tagsinput.min.js"/>
+			<item value="selectByPrimaryKey"/>
+			<item value="$modelId"/>
+			<item value="/deviceModel/listid"/>
+			<item value="/deviceModel/listid "/>
+			<item value="delete"/>
+			<item value="getIdSelections"/>
+			<item value="deleteDeviceModel"/>
+			<item value="add"/>
 		</list>
 		<list key="replacehistory">
+			<item value="Model"/>
+			<item value="dm_list"/>
 			<item value="IotLoadFrame"/>
 			<item value="gw_list.$table"/>
 			<item value="min"/>
@@ -28,7 +30,7 @@
 		<item value="273" key="DIALOG_WIDTH"/>
 		<item value="1|微软雅黑|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|微软雅黑" key="DIALOG_FONT_NAME"/>
 		<item value="399" key="DIALOG_HEIGHT"/>
-		<item value="755" key="DIALOG_X_ORIGIN"/>
-		<item value="280" key="DIALOG_Y_ORIGIN"/>
+		<item value="835" key="DIALOG_X_ORIGIN"/>
+		<item value="245" key="DIALOG_Y_ORIGIN"/>
 	</section>
 </section>

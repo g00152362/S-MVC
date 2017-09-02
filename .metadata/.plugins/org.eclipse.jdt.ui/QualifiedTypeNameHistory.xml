@@ -25,4 +25,9 @@
 <fullyQualifiedTypeName name="com.dot.pojo.TbGatewayInfoExample"/>
 <fullyQualifiedTypeName name="com.dot.pojo.TbGatewayInfoExample.Criteria"/>
 <fullyQualifiedTypeName name="com.dot.pojo.TbGatewayInfo"/>
+<fullyQualifiedTypeName name="com.dot.mapper.TbDeviceModelMapper"/>
+<fullyQualifiedTypeName name="com.dot.pojo.TbDeviceModelExample"/>
+<fullyQualifiedTypeName name="com.dot.service.DeviceModelService"/>
+<fullyQualifiedTypeName name="com.dot.pojo.TbDeviceModel"/>
+<fullyQualifiedTypeName name="com.dot.pojo.TbDeviceModelExample.Criteria"/>
 </qualifiedTypeNameHistroy>

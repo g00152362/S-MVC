@@ -39,21 +39,47 @@
 	                  <div class="col-sm-8">
 		                    <input type="text" class="form-control" name="coreNumber" id="coreNumber" placeholder="coreNumber">
 	                  </div>
+	                  
 	              </div> 
 	              
                 <div class="form-group">
-	                  <label for="memory" class="col-sm-2 control-label">Memory(M):</label>
-	                  <div class="col-sm-8">
+	                  <label for="memory" class="col-sm-2 control-label">Memory:</label>
+	                  <div class="col-sm-4">
 		                    <input type="text" class="form-control" name="memory" id="memory" placeholder="memory">
 	                  </div>
+	                  <div class="col-sm-2">
+							<label class="radio-inline">
+							  <input type="radio" name="m_unit" value=1 checked> M
+							</label>
+							<label class="radio-inline">
+							  <input type="radio" name="m_unit"  value=1000> G
+							</label>	                  
+	                  </div>	
+                                  
 	              </div> 	
 	              
                 <div class="form-group">
-	                  <label for="storage" class="col-sm-2 control-label">Storage(M):</label>
-	                  <div class="col-sm-8">
+	                  <label for="storage" class="col-sm-2 control-label">Storage:</label>
+	                  <div class="col-sm-4">
 		                    <input type="text" class="form-control" name="storage" id="storage" placeholder="storage">
 	                  </div>
-	              </div> 		              	              	                                          
+	                  <div class="col-sm-2" >
+							<label class="radio-inline">
+							  <input type="radio" name="s_unit" value=1 checked> M
+							</label>
+							<label class="radio-inline">
+							  <input type="radio" name="s_unit"  value=1000> G
+							</label>	                  
+	                  </div>
+	              </div> 		
+	              
+					<div class="form-group">
+						<label for="pic" class="col-sm-2 control-label">File Field</label>
+						
+						<div class="col-sm-4">
+							<input type="file" class="form-control" id="photo" placeholder="Placeholder">
+						</div>
+					</div>	                            	              	                                          
 
                 <div class="form-group">
  	                 <label for="description" class="col-sm-2 control-label">Description:</label>
@@ -69,7 +95,7 @@
 	                </div>
 	                
 	                <div class="col-sm-2 col-sm-offset-2">           
-	                <button type="button" class="btn btn-default " onclick="cancelAdd()">Cancel</button>
+	                <button type="button" class="btn btn-default " onclick="dm_add.cancelAdd()">Cancel</button>
 	                </div>
 	            </div>
  
