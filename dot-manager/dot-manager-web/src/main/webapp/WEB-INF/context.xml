@@ -5,7 +5,7 @@
 		type="org.apache.activemq.ActiveMQConnectionFactory" 
 		description="JMS Connection Factory"
 		factory="org.apache.activemq.jndi.JNDIReferenceFactory" 
-		brokerURL="tcp://localhost:61616" 
+		brokerURL="tcp://localhost:61616?wireFormat.maxInactivityDuration=0" 
 		brokerName="MyActiveMQBroker"/>
 		
 	<Resource name="myJMS/MessageQueue" 
@@ -27,6 +27,13 @@
 		description="report status to conntroller"		
 		factory="org.apache.activemq.jndi.JNDIReferenceFactory"
 		physicalName="gateway.report"/>		
+		
+	<Resource name="myJMS/sensorData"
+		auth="Container"
+		type="org.apache.activemq.command.ActiveMQTopic"
+		description="report status to conntroller"		
+		factory="org.apache.activemq.jndi.JNDIReferenceFactory"
+		physicalName="sensorData"/>				
     <!-- Uncomment this to disable session persistence across Tomcat restarts -->
     <!--
     <Manager pathname="" />

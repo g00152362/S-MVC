@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
+	<item value="true" key="EXT_FOLDER_LAST_SUBDIR_SETTING"/>
+	<item value="D:\guojun\java 学习\S-MVC" key="EXT_FOLDER_LAST_PATH_SETTING"/>
 	<item value="false" key="EXT_FOLDER_SOURCE_LAST_SUBDIR_SETTING"/>
 	<section name="org.eclipse.debug.ui.STRING_VARIABLE_SELECTION_DIALOG_SECTION">
 		<item value="398" key="DIALOG_WIDTH"/>

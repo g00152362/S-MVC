@@ -2,20 +2,20 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="selectByPrimaryKey" key="selection"/>
+		<item value="post" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="post"/>
+			<item value="/////"/>
 			<item value="selectByPrimaryKey"/>
 			<item value="$modelId"/>
 			<item value="/deviceModel/listid"/>
 			<item value="/deviceModel/listid "/>
 			<item value="delete"/>
 			<item value="getIdSelections"/>
-			<item value="deleteDeviceModel"/>
-			<item value="add"/>
 		</list>
 		<list key="replacehistory">
 			<item value="Model"/>

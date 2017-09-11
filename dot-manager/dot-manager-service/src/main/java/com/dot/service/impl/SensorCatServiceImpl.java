@@ -31,5 +31,20 @@ public class SensorCatServiceImpl implements SensorCatService {
 		return null;
 	}
 
+	@Override
+	public long getSensorCatIdByName(String catName) {
+		// TODO Auto-generated method stub
+		TbSensorCatExample example = new TbSensorCatExample();
+		Criteria cr = example.createCriteria();
+		cr.andNameEqualTo(catName);
+		List <TbSensorCat> result = sensorCatMapper.selectByExample(example);
+		if(result != null)
+		{
+			return result.get(0).getId();
+		}
+		
+		return 0;
+	}
+
 
 }

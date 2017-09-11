@@ -474,6 +474,136 @@ public class TbSensorCatExample {
             addCriterion("created not between", value1, value2, "created");
             return (Criteria) this;
         }
+
+        public Criteria andUnitIsNull() {
+            addCriterion("unit is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUnitIsNotNull() {
+            addCriterion("unit is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUnitEqualTo(String value) {
+            addCriterion("unit =", value, "unit");
+            return (Criteria) this;
+        }
+
+        public Criteria andUnitNotEqualTo(String value) {
+            addCriterion("unit <>", value, "unit");
+            return (Criteria) this;
+        }
+
+        public Criteria andUnitGreaterThan(String value) {
+            addCriterion("unit >", value, "unit");
+            return (Criteria) this;
+        }
+
+        public Criteria andUnitGreaterThanOrEqualTo(String value) {
+            addCriterion("unit >=", value, "unit");
+            return (Criteria) this;
+        }
+
+        public Criteria andUnitLessThan(String value) {
+            addCriterion("unit <", value, "unit");
+            return (Criteria) this;
+        }
+
+        public Criteria andUnitLessThanOrEqualTo(String value) {
+            addCriterion("unit <=", value, "unit");
+            return (Criteria) this;
+        }
+
+        public Criteria andUnitLike(String value) {
+            addCriterion("unit like", value, "unit");
+            return (Criteria) this;
+        }
+
+        public Criteria andUnitNotLike(String value) {
+            addCriterion("unit not like", value, "unit");
+            return (Criteria) this;
+        }
+
+        public Criteria andUnitIn(List<String> values) {
+            addCriterion("unit in", values, "unit");
+            return (Criteria) this;
+        }
+
+        public Criteria andUnitNotIn(List<String> values) {
+            addCriterion("unit not in", values, "unit");
+            return (Criteria) this;
+        }
+
+        public Criteria andUnitBetween(String value1, String value2) {
+            addCriterion("unit between", value1, value2, "unit");
+            return (Criteria) this;
+        }
+
+        public Criteria andUnitNotBetween(String value1, String value2) {
+            addCriterion("unit not between", value1, value2, "unit");
+            return (Criteria) this;
+        }
+
+        public Criteria andValueNumberIsNull() {
+            addCriterion("value_number is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andValueNumberIsNotNull() {
+            addCriterion("value_number is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andValueNumberEqualTo(Integer value) {
+            addCriterion("value_number =", value, "valueNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andValueNumberNotEqualTo(Integer value) {
+            addCriterion("value_number <>", value, "valueNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andValueNumberGreaterThan(Integer value) {
+            addCriterion("value_number >", value, "valueNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andValueNumberGreaterThanOrEqualTo(Integer value) {
+            addCriterion("value_number >=", value, "valueNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andValueNumberLessThan(Integer value) {
+            addCriterion("value_number <", value, "valueNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andValueNumberLessThanOrEqualTo(Integer value) {
+            addCriterion("value_number <=", value, "valueNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andValueNumberIn(List<Integer> values) {
+            addCriterion("value_number in", values, "valueNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andValueNumberNotIn(List<Integer> values) {
+            addCriterion("value_number not in", values, "valueNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andValueNumberBetween(Integer value1, Integer value2) {
+            addCriterion("value_number between", value1, value2, "valueNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andValueNumberNotBetween(Integer value1, Integer value2) {
+            addCriterion("value_number not between", value1, value2, "valueNumber");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

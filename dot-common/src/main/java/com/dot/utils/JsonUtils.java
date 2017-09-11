@@ -22,7 +22,7 @@ public class JsonUtils {
 	
 
 	        
-	        String[] formats = { "yyyy-MM-dd't'HH:mm:ss'z'" };
+	        String[] formats = { "yyyy-MM-dd't'HH:mm:ss'z'" , "yyyy-MM-dd HH:mm:ss"};
 	        JSONUtils.getMorpherRegistry().registerMorpher(new DateMorpher(formats), true);	        
 	        JSONObject jsonObject = JSONObject.fromObject(jsonString);	        
 //	        String[] dateFormats = new String[]{"yyyy-MM-dd HH:mm:ss"};  
@@ -33,6 +33,8 @@ public class JsonUtils {
 	        return pojo;
 
 	    }
+	  
+
 	  
 	   public static String beanToJson(Object obj) {
 	        JsonConfig config = new JsonConfig();

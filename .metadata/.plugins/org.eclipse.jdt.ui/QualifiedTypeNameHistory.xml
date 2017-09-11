@@ -8,7 +8,6 @@
 <fullyQualifiedTypeName name="org.eclipse.paho.client.mqttv3.MqttException"/>
 <fullyQualifiedTypeName name="javax.jms.BytesMessage"/>
 <fullyQualifiedTypeName name="java.sql.Date"/>
-<fullyQualifiedTypeName name="java.util.Date"/>
 <fullyQualifiedTypeName name="dot.com.common.pojo.EUDataGridResult"/>
 <fullyQualifiedTypeName name="org.springframework.stereotype.Service"/>
 <fullyQualifiedTypeName name="com.dot.mapper.TbDeviceGroupMapper"/>
@@ -21,7 +20,6 @@
 <fullyQualifiedTypeName name="org.springframework.stereotype.Controller"/>
 <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestMapping"/>
 <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PathVariable"/>
-<fullyQualifiedTypeName name="dot.com.common.result.TaotaoResult"/>
 <fullyQualifiedTypeName name="com.dot.pojo.TbGatewayInfoExample"/>
 <fullyQualifiedTypeName name="com.dot.pojo.TbGatewayInfoExample.Criteria"/>
 <fullyQualifiedTypeName name="com.dot.pojo.TbGatewayInfo"/>
@@ -30,4 +28,17 @@
 <fullyQualifiedTypeName name="com.dot.service.DeviceModelService"/>
 <fullyQualifiedTypeName name="com.dot.pojo.TbDeviceModel"/>
 <fullyQualifiedTypeName name="com.dot.pojo.TbDeviceModelExample.Criteria"/>
+<fullyQualifiedTypeName name="com.dot.mapper.TbSensorDataMapper"/>
+<fullyQualifiedTypeName name="com.dot.pojo.msgSensorPacket"/>
+<fullyQualifiedTypeName name="com.dot.utils.JsonUtils"/>
+<fullyQualifiedTypeName name="com.dot.service.SensorDataService"/>
+<fullyQualifiedTypeName name="com.dot.service.SensorCatService"/>
+<fullyQualifiedTypeName name="com.dot.pojo.reqDataCondition"/>
+<fullyQualifiedTypeName name="com.dot.pojo.TbSensorData"/>
+<fullyQualifiedTypeName name="com.dot.pojo.TbSensorDataExample"/>
+<fullyQualifiedTypeName name="com.dot.pojo.TbSensorDataExample.Criteria"/>
+<fullyQualifiedTypeName name="java.util.Date"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="net.sf.json.JSONObject"/>
+<fullyQualifiedTypeName name="dot.com.common.result.TaotaoResult"/>
 </qualifiedTypeNameHistroy>

@@ -15,6 +15,10 @@ public class TbSensorCat {
 
     private Date created;
 
+    private String unit;
+
+    private Integer valueNumber;
+
     public Long getId() {
         return id;
     }
@@ -61,5 +65,21 @@ public class TbSensorCat {
 
     public void setCreated(Date created) {
         this.created = created;
+    }
+
+    public String getUnit() {
+        return unit;
+    }
+
+    public void setUnit(String unit) {
+        this.unit = unit == null ? null : unit.trim();
+    }
+
+    public Integer getValueNumber() {
+        return valueNumber;
+    }
+
+    public void setValueNumber(Integer valueNumber) {
+        this.valueNumber = valueNumber;
     }
 }
