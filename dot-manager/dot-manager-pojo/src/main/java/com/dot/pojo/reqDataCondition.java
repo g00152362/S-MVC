@@ -3,10 +3,9 @@ package com.dot.pojo;
 public class reqDataCondition {
 	private String mac;
 	private String type;
-	private String dateFrom;
-	private String dateEnd;
-	private String timeFrom;
-	private String timeEnd;
+	private long startTimestamp;
+	private long endTimestamp;
+	
 	
 	public String getMac() {
 		return mac;
@@ -20,36 +19,22 @@ public class reqDataCondition {
 	public void setType(String type) {
 		this.type = type;
 	}
-	public String getDateFrom() {
-		return dateFrom;
+	public long getStartTimestamp() {
+		return startTimestamp;
 	}
-	public void setDateFrom(String dateFrom) {
-		this.dateFrom = dateFrom;
+	public void setStartTimestamp(long startTimestamp) {
+		this.startTimestamp = startTimestamp;
 	}
-	public String getDateEnd() {
-		return dateEnd;
+	public long getEndTimestamp() {
+		return endTimestamp;
 	}
-	public void setDateEnd(String dateEnd) {
-		this.dateEnd = dateEnd;
-	}
-	public String getTimeFrom() {
-		return timeFrom;
-	}
-	public void setTimeFrom(String timeFrom) {
-		this.timeFrom = timeFrom;
-	}
-	public String getTimeEnd() {
-		return timeEnd;
-	}
-	public void setTimeEnd(String timeEnd) {
-		this.timeEnd = timeEnd;
+	public void setEndTimestamp(long endTimestamp) {
+		this.endTimestamp = endTimestamp;
 	}
 	@Override
 	public String toString() {
-		return "reqDataCondition [mac=" + mac + ", type=" + type + ", dateFrom=" + dateFrom + ", dateEnd=" + dateEnd
-				+ ", timeFrom=" + timeFrom + ", timeEnd=" + timeEnd + "]";
+		return "reqDataCondition [mac=" + mac + ", type=" + type + ", startTimestamp=" + startTimestamp
+				+ ", endTimestamp=" + endTimestamp + "]";
 	}
-	
-	
 	
 }

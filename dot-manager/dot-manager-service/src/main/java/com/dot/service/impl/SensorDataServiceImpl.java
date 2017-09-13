@@ -41,12 +41,9 @@ public class SensorDataServiceImpl implements SensorDataService{
 		Criteria cr = example.createCriteria();
 		cr.andMacEqualTo(cond.getMac());
 		cr.andTypeIdEqualTo(typeId);
-		// how to process from and end????
-		/*
-		Date from = new Date();
-		Date end = new Date();
+		//System.out.println("start"+cond.getStartTimestamp()+"end"+cond.getEndTimestamp());
+		cr.andTimestampBetween(cond.getStartTimestamp(),cond.getEndTimestamp());
 
-		cr.andTimestampBetween(from, end);*/
 		List<TbSensorData> result = itemMapper.selectByExample(example);
 		if(result != null && result.size() >0){
 			return result;

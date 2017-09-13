@@ -33,7 +33,7 @@ public class sensorDataListener implements  MessageListener{
 	public void onMessage(Message message) {
 		// TODO Auto-generated method stub
 		if(message instanceof BytesMessage ){
-			LOG.info("BytesMessage incoming" );
+			//LOG.info("BytesMessage incoming" );
 			BytesMessage bm= (BytesMessage) message;
 			
             byte[] b = new byte[1024];
@@ -60,59 +60,119 @@ public class sensorDataListener implements  MessageListener{
              		sd.setDate(dd);
              		
              		long catid;
-             		catid = sernsorCatService.getSensorCatIdByName("temperature");
+                	catid = sernsorCatService.getSensorCatIdByName("temperature");
             		sd.setTypeId(catid);
             		sd.setValue(sensorPacket.getTemperature());
-               		sernsorDataService.insertSensorData(sd);
+                	if (catid < 0){
+                		LOG.info("can't find item in sensorcat");
+                	}
+                	else
+                	{
+                  		sernsorDataService.insertSensorData(sd);                	
+                	} 
                		
              		catid = sernsorCatService.getSensorCatIdByName("humidity");
             		sd.setTypeId(catid);
             		sd.setValue(sensorPacket.getHumidity());
-               		sernsorDataService.insertSensorData(sd);            		
+                	if (catid < 0){
+                		LOG.info("can't find item in sensorcat");
+                	}
+                	else
+                	{
+                  		sernsorDataService.insertSensorData(sd);                	
+                	}             		
                		
              		catid = sernsorCatService.getSensorCatIdByName("ir");
             		sd.setTypeId(catid);            		
             		sd.setValue(sensorPacket.getIr());
-               		sernsorDataService.insertSensorData(sd);   		
+                	if (catid < 0){
+                		LOG.info("can't find item in sensorcat");
+                	}
+                	else
+                	{
+                  		sernsorDataService.insertSensorData(sd);                	
+                	}  		
 
              		catid = sernsorCatService.getSensorCatIdByName("pressure");
             		sd.setTypeId(catid);  
             		sd.setValue((float)sensorPacket.getPressure());
-               		sernsorDataService.insertSensorData(sd);   		
+                	if (catid < 0){
+                		LOG.info("can't find item in sensorcat");
+                	}
+                	else
+                	{
+                  		sernsorDataService.insertSensorData(sd);                	
+                	}   		
 
              		catid = sernsorCatService.getSensorCatIdByName("light");
             		sd.setTypeId(catid);                 		
             		sd.setValue(sensorPacket.getLight());
-               		sernsorDataService.insertSensorData(sd);               		
+                	if (catid < 0){
+                		LOG.info("can't find item in sensorcat");
+                	}
+                	else
+                	{
+                  		sernsorDataService.insertSensorData(sd);                	
+                	}                		
 
              		catid = sernsorCatService.getSensorCatIdByName("noise");
             		sd.setTypeId(catid);               		
             		sd.setValue((float)sensorPacket.getNoise());
-               		sernsorDataService.insertSensorData(sd);   		
+                	if (catid < 0){
+                		LOG.info("can't find item in sensorcat");
+                	}
+                	else
+                	{
+                  		sernsorDataService.insertSensorData(sd);                	
+                	}   		
 
              		catid = sernsorCatService.getSensorCatIdByName("battery");
             		sd.setTypeId(catid);                   		
             		sd.setValue((float)sensorPacket.getBattery());
-               		sernsorDataService.insertSensorData(sd);  
+                	if (catid < 0){
+                		LOG.info("can't find item in sensorcat");
+                	}
+                	else
+                	{
+                  		sernsorDataService.insertSensorData(sd);                	
+                	}  
 
              		catid = sernsorCatService.getSensorCatIdByName("accelerate");
             		sd.setTypeId(catid);               		
             		sd.setValue(sensorPacket.getAccelerate_X());
             		sd.setValue1(sensorPacket.getAccelerate_Y()); 
             		sd.setValue2(sensorPacket.getAccelerate_Z());               		
-               		sernsorDataService.insertSensorData(sd);    
+                	if (catid < 0){
+                		LOG.info("can't find item in sensorcat");
+                	}
+                	else
+                	{
+                  		sernsorDataService.insertSensorData(sd);                	
+                	}  
 
              		catid = sernsorCatService.getSensorCatIdByName("gyroscope");
             		sd.setTypeId(catid); 
             		sd.setValue(sensorPacket.getGyroscope_X());
             		sd.setValue1(sensorPacket.getGyroscope_Y()); 
             		sd.setValue2(sensorPacket.getGyroscope_Z());               		
-               		sernsorDataService.insertSensorData(sd);  
+                	if (catid < 0){
+                		LOG.info("can't find item in sensorcat");
+                	}
+                	else
+                	{
+                  		sernsorDataService.insertSensorData(sd);                	
+                	}   
                		
              		catid = sernsorCatService.getSensorCatIdByName("hall");            		
             		sd.setTypeId(catid);             		
             		sd.setValue((float)sensorPacket.getHall());
-               		sernsorDataService.insertSensorData(sd);      
+                	if (catid < 0){
+                		LOG.info("can't find item in sensorcat");
+                	}
+                	else
+                	{
+                  		sernsorDataService.insertSensorData(sd);                	
+                	}    
                		           		
             	}
 			} catch (JMSException e) {

@@ -7,5 +7,6 @@ import com.dot.pojo.TbSensorCat;
 
 public interface SensorCatService {
 	List<TbSensorCat> getTbSensorCatList(long parentid);
-	long  getSensorCatIdByName(String catName);
+	TbSensorCat getSensorCatItemByName(String catName);
+	long getSensorCatIdByName(String catName);
 }
