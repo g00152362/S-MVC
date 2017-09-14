@@ -46,6 +46,12 @@ public class SensorDataController {
 		ArrayList<Float>  value1 = new ArrayList<Float> ();	
 		ArrayList<Float>  value2 = new ArrayList<Float> ();	
 		ArrayList<Float>  value3 = new ArrayList<Float> ();	
+		if(result == null)
+		{
+			TaotaoResult r = new TaotaoResult();
+			r.setStatus(TaotaoResult.OBJ_IS_NOT_EXSIT);
+			return r;
+		}
 		
 		for(int i=0; i<result.size();i++){
 			sd = result.get(i);

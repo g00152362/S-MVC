@@ -1,4 +1,14 @@
 var dataShow = dataShow || {};
+Data = [] ;
+currTime = 0; 
+
+if(typeof valueType == "undefined"){
+	valueType = {};
+	valueType.light = 1;
+	valueType.humidity = 2;
+	valueType.accelerate = 3;
+};
+
 
 (function($, window, undefined){
 	dataShow.$lData ; 
@@ -31,11 +41,11 @@ var dataShow = dataShow || {};
             },
             dataZoom: [{
                 type: 'inside',
-                start: 10,
-                end: 70
+                start: 50,
+                end: 100
             }, {
-                start: 10,
-                end: 70,
+                start: 50,
+                end: 100,
                 handleStyle: {
                     color: '#fff',
                     shadowBlur: 3,
@@ -73,11 +83,11 @@ var dataShow = dataShow || {};
             },
             dataZoom: [{
                 type: 'inside',
-                start: 10,
-                end: 70
+                start: 50,
+                end: 100
             }, {
-                start: 10,
-                end: 70,
+                start: 50,
+                end: 100,
                 handleStyle: {
                     color: '#fff',
                     shadowBlur: 3,
@@ -143,19 +153,21 @@ var dataShow = dataShow || {};
         accelerateChart.setOption(accelerateOption);        
         // tmp data request, time is stamp since 1970:0
 
-        var dd= new Date("2017-09-13 23:20:00");
+ 
+        
+        var dd= new Date("2017-09-13 23:30:00");
         var start = dd.getTime()/1000;
-        var dd1 = new  Date("2017-09-13 23:50:00");
+        var dd1 = new  Date("2017-09-13 23:35:00");
         var end = dd1.getTime()/1000;
     	var param = {mac:"12:D2:08:2D:07:98",
     				 type:'light',
     				 startTimestamp:start,
     				 endTimestamp:end};
-         postData(lightChart,param,'dataShow.$lData');
+       //  postData(lightChart,param,Data);
+         
+       
 
-        
-//        var currTime = Date.parse(new Date()); 
-        
+
         
         
     	var param1 = {mac:"12:D2:08:2D:07:98",
@@ -165,28 +177,30 @@ var dataShow = dataShow || {};
     	
     	postData(humidityChart,param1);
     	
+
+    	
+    	
     	var param2 = {mac:"12:D2:08:2D:07:98",
 				 type:'accelerate',
 				 startTimestamp:start,
 				 endTimestamp:end};
-       postData(accelerateChart,param2);
-  /*      
+  //     postData(accelerateChart,param2);
+        
+    	currTime = end;       
 
 		setInterval(function () {
-			//todo changed
-		    for (var i = 0; i < 5; i++) {
-		        data.shift();
-		        data.push(randomData());
-		    }
-
-		    humidityChart.setOption({
-		        series: [{
-		            data: data
-		        }]
-		    });
-		}, 5000);*/
+	    	var param3 = {mac:"12:D2:08:2D:07:98",
+					 type:'humidity',
+					 startTimestamp:currTime,
+					 endTimestamp:currTime +10};
+	    	currTime =currTime +10;
+//	    	console.log(param3);
+   	
+	    	postNewData(humidityChart,param3,true,1);	//		valueType.humidity
+		}, 2500);
 	});
 	
+
 
 })(jQuery, window);
 
@@ -201,31 +215,75 @@ function postData(obj,param,dataArray){
 	 	            data: data.data.categories
 	 	        }
 	       	 });
-			
-			//var value = new Array(data.data.valueNumber);
+			//save data
+			if(Data.length == 0)
+			{
+				Data.push({categories:data.data.categories});
+			}			
+
 			var seriesArray=new Array();
 			var i = 0;
 			for(i=0;i <data.data.valueNumber;i++ ){
 					var valuename = eval('data.data.value'+i);
 					var obj1 = { data: valuename};
 					seriesArray.push(obj1);
-
 			}
+		
+			
 			
 			obj.setOption({ series: seriesArray });	
-/*			var gName = eval(dataArray);
-			gName = JSON.parse(JSON.stringify(data.data)); 
-			console.log("gName");
-			console.log(gName);
-			console.log("$hData");
-			console.log(dataShow.$hData);
-	*/		
-	
+			// save the data
+			Data.push(seriesArray);
+
 		}
 
 	});	
 
-}
+}	;
+
+function postNewData(obj,param,bc,type){
+	//console.log(Data[0].categories);
+	$.post("/sensorData/getdata",param, function(data){
+		if(data.status == 200){
+			//save data
+			if(bc == true)
+			{
+				//console.log(data.data.categories.length);
+				for (var i = 0 ;i <data.data.categories.length;i++){
+			        Data[0].categories.shift();
+			        Data[0].categories.push(data.data.categories[i]);				
+				}
+			}	
+		//	console.log(Data[0].categories);			
+			obj.setOption({
+	 	        xAxis: {
+	 	            data:  Data[0].categories,
+	 	        }
+	       	 });
+			
+			//console.log(type);
+			var seriesArray=new Array();
+			var i = 0;
+			for(i=0;i <data.data.valueNumber;i++ ){
+					var valuename = eval('data.data.value'+i);
+					var obj1 = { data: valuename};
+				//	console.log(obj1);
+					for(var j = 0; j<obj1.data.length;j++){
+						Data[type][i].data.shift();
+						Data[type][i].data.push(obj1.data[j]);
+					}
+					seriesArray.push(Data[type][i]);
+			}
+			
+			obj.setOption({ series: seriesArray });	
+				
+
+		}
+
+	});	
+
+}	;
+
 
 
 
