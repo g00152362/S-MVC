@@ -42,7 +42,12 @@ public class SensorDataServiceImpl implements SensorDataService{
 		cr.andMacEqualTo(cond.getMac());
 		cr.andTypeIdEqualTo(typeId);
 		//System.out.println("start"+cond.getStartTimestamp()+"end"+cond.getEndTimestamp());
-		cr.andTimestampBetween(cond.getStartTimestamp(),cond.getEndTimestamp());
+		if(cond.getEndTimestamp() != 0){
+			cr.andTimestampBetween(cond.getStartTimestamp(),cond.getEndTimestamp());
+		}else
+		{
+			cr.andTimestampGreaterThan(cond.getStartTimestamp());
+		}
 
 		List<TbSensorData> result = itemMapper.selectByExample(example);
 		if(result != null && result.size() >0){

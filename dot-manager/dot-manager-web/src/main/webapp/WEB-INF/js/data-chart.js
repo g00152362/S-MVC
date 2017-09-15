@@ -7,6 +7,8 @@ if(typeof valueType == "undefined"){
 	valueType.light = 1;
 	valueType.humidity = 2;
 	valueType.accelerate = 3;
+	valueType.gyroscope = 4;	
+	
 };
 
 
@@ -19,6 +21,8 @@ if(typeof valueType == "undefined"){
         var lightChart = echarts.init(document.getElementById('light'));
         var humidityChart = echarts.init(document.getElementById('humidity'));
         var accelerateChart = echarts.init(document.getElementById('accelerate'));
+        var gyroscopeChart = echarts.init(document.getElementById('gyroscope'));        
+        
         
         // 指定图表的配置项和数据
         var commOption = {
@@ -143,60 +147,71 @@ if(typeof valueType == "undefined"){
               yAxis: {
               	name : 'g/s',
               },
-          };       
+          };   
+      
+      var gyroscopeOption = {
+              title: {
+                  text: 'Gyroscope',
+              },
+              yAxis: {
+              	name : 'dps',
+              },
+          };          
       
       	lightChart.setOption(commOption);      
         lightChart.setOption(lightOption);
         humidityChart.setOption(commOption); 
         humidityChart.setOption(humidityOption);
         accelerateChart.setOption(multiOption);      
-        accelerateChart.setOption(accelerateOption);        
+        accelerateChart.setOption(accelerateOption);     
+        gyroscopeChart.setOption(multiOption);      
+        gyroscopeChart.setOption(gyroscopeOption);         
         // tmp data request, time is stamp since 1970:0
 
  
         
-        var dd= new Date("2017-09-13 23:30:00");
+        var dd= new Date("2017-09-15 22:05:00");
         var start = dd.getTime()/1000;
-        var dd1 = new  Date("2017-09-13 23:35:00");
+        var dd1 = new  Date("2017-09-15 22:07:00");
         var end = dd1.getTime()/1000;
     	var param = {mac:"12:D2:08:2D:07:98",
     				 type:'light',
     				 startTimestamp:start,
-    				 endTimestamp:end};
-       //  postData(lightChart,param,Data);
+    				 endTimestamp:0
+    				 };
+         postData(lightChart,param,Data,valueType.light);
          
-       
-
-
+         param.type = 'humidity';
+      	 postData(humidityChart,param,valueType.humidity);
+    	
+      	 param.type = 'accelerate';
+         postData(accelerateChart,param,valueType.accelerate);
         
-        
-    	var param1 = {mac:"12:D2:08:2D:07:98",
-				 type:'humidity',
-				 startTimestamp:start,
-				 endTimestamp:end};
-    	
-    	postData(humidityChart,param1);
-    	
-
-    	
-    	
-    	var param2 = {mac:"12:D2:08:2D:07:98",
-				 type:'accelerate',
-				 startTimestamp:start,
-				 endTimestamp:end};
-  //     postData(accelerateChart,param2);
-        
+         //gyroscope
+     	 param.type = 'gyroscope';
+         postData(gyroscopeChart,param,valueType.gyroscope);         
+         
     	currTime = end;       
 
 		setInterval(function () {
-	    	var param3 = {mac:"12:D2:08:2D:07:98",
-					 type:'humidity',
+			var param12 = {mac:"12:D2:08:2D:07:98",
+					 type:'light',
 					 startTimestamp:currTime,
-					 endTimestamp:currTime +10};
+					 endTimestamp:0};
 	    	currTime =currTime +10;
-//	    	console.log(param3);
-   	
-	    	postNewData(humidityChart,param3,true,1);	//		valueType.humidity
+
+
+	    	postNewData(lightChart,param12,true,valueType.light);	
+
+	    	param12.type = 'humidity';
+	    	postNewData(humidityChart,param12,false,valueType.humidity);	//		valueType.humidity
+	    	
+	    	param12.type = 'accelerate';
+	    	postNewData(accelerateChart,param12,false,valueType.accelerate);
+	    	
+	    	param12.type = 'gyroscope';
+	    	postNewData(gyroscopeChart,param12,false,valueType.gyroscope);	    	
+	    	
 		}, 2500);
 	});
 	
@@ -206,7 +221,7 @@ if(typeof valueType == "undefined"){
 
 
 
-function postData(obj,param,dataArray){
+function postData(obj,param,dataArray,type){
 
 	$.post("/sensorData/getdata",param, function(data){
 		if(data.status == 200){
@@ -250,7 +265,11 @@ function postNewData(obj,param,bc,type){
 			{
 				//console.log(data.data.categories.length);
 				for (var i = 0 ;i <data.data.categories.length;i++){
-			        Data[0].categories.shift();
+					//if(Data[0].categories.length >15)
+					{
+						 Data[0].categories.shift();
+					}
+			       
 			        Data[0].categories.push(data.data.categories[i]);				
 				}
 			}	
@@ -261,6 +280,7 @@ function postNewData(obj,param,bc,type){
 	 	        }
 	       	 });
 			
+		//	console.log(Data[type]);
 			//console.log(type);
 			var seriesArray=new Array();
 			var i = 0;
@@ -269,12 +289,15 @@ function postNewData(obj,param,bc,type){
 					var obj1 = { data: valuename};
 				//	console.log(obj1);
 					for(var j = 0; j<obj1.data.length;j++){
-						Data[type][i].data.shift();
+						//if(Data[type][i].data.length > 15)
+						{
+							Data[type][i].data.shift();
+						}
 						Data[type][i].data.push(obj1.data[j]);
 					}
 					seriesArray.push(Data[type][i]);
 			}
-			
+		//	console.log(Data[type]);
 			obj.setOption({ series: seriesArray });	
 				
 

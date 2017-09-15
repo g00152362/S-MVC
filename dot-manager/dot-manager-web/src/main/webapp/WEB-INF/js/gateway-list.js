@@ -135,7 +135,8 @@ var gw_list = gw_list || {};
  			return "<span style=\"45px;color:#5ECC49;\">\&#8226</span>"+"<span style=\";\">Online</span>";
  		}
  		else if(value == 0){
- 			return "<span style=\"display:table-cell;color:#AAAAAA;font-size:30px;\">\&#8226</span>"+"<span style=\"display:table-cell;\">Offline</span>";
+ 			return "<span style=\"display:table-cell;vertical-align:middle;height:45px;color:#AAAAAA;font-size:40px;\">\&#8226</span>"+"<span style=\"display:table-cell;vertical-align:middle;height:45px;\">Offline</span>"; 			
+ 			
  		}
  		else if(value == 2){
  			return "<span style=\"display:table-cell;vertical-align:middle;height:45px;color:#AAAAAA;font-size:40px;\">\&#8226</span>"+"<span style=\"display:table-cell;vertical-align:middle;height:45px;\">unregistered</span>";
